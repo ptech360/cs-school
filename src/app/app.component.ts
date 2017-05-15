@@ -11,6 +11,7 @@ import { PollComponent } from './component/poll/poll.component';
 import { SuggestionComponent } from './component/suggestion/suggestion.component';
 import { SurveyComponent } from './component/survey/survey.component';
 import { AuthService } from './providers/auth.service';
+import { LoggedInGuard } from './component/login/login.gaurd';
 declare let $;
 @Component({
   selector: 'app',
@@ -31,7 +32,7 @@ export class AppComponent implements AfterViewInit{
       { title: 'Circular', component: CircularComponent , icon: 'assets/icon/homework.png', url: 'circular'},
       { title: 'Homework', component: HomeworkComponent, icon: 'assets/icon/circular.png', url: 'homework' }
     ];
-  constructor(public auth:AuthService){
+  constructor(public auth:AuthService, public log:LoggedInGuard){
     
   }
   ngAfterViewInit(){

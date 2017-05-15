@@ -18,4 +18,8 @@ export class LoggedInGuard implements CanActivate {
         return false;
   }
 
+  isLoggedIn(){
+    return this.canActivate();
+  }
+
 }
