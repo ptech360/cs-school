@@ -1,0 +1,88 @@
+<h3>Complaint Component</h3>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">All Complaints</div>
+
+  <!-- Table -->
+  <div class="panel-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Title</th>
+          <th>StudentName</th>
+          <th *ngIf="!complaintStatus">Status</th>
+          <th>Priority</th>
+          <th *ngIf="!(complaintStatus == 4 || complaintStatus == 5)">Edit</th>
+          <th>Comment</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of complaints; let i = index;">
+          <td (click)="openModal(c)" class="action"><span class="cid">{{c.id}}</span></td>
+          <td>{{c.title}}</td>
+          <td>{{c.studentName}} - {{c.studentStandardName}}</td>
+          <td *ngIf="!complaintStatus"><span [style.background]="c.statusColor" class="badge">{{c.statusName}}</span></td>
+          <td>{{c.priorityName}}</td>
+          <td *ngIf="!(complaintStatus == 4 || complaintStatus == 5)"><a (click)="openEditModal(c)" class="action"><i class="material-icons">create</i></a></td>
+          <!--<td class="center-align"><a href="#chat" (click)="getComplaintCommentById(c.id)" class="action"><i class="material-icons">chat_bubble</i></a></td>-->
+          <td class="center-align"><a onclick="$('.panel.panel-chat').show();" (click)="getComplaintCommentById(c.id)" class="action"><i class="material-icons">chat_bubble</i></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="panel-footer">
+    <button (click)="previousComplaint()" class="btn nav-btn right" [disabled]="currentPage === 1">Previous</button>
+    <button (click)="nextComplaint()" class="btn right nav-btn" [disabled]="EmptyComplaints">Next</button>    
+  </div>
+</div>
+
+<div id="modal1" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{complaint.title}}</h4>
+      </div>
+      <div class="modal-body">
+        {{complaint}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!--<!- chat -->
+<div id="chat" class="panel panel-chat">
+  <div class="panel-heading">
+    <a href="#" class="chatMinimize" onclick="return false"><span>{{complaintTitleOfCommentModel | uppercase}}</span></a>
+    <a href="#" class="chatClose" onclick="return false"><i class="glyphicon glyphicon-remove"></i></a>
+    <div class="clearFix"></div>
+  </div>
+  <div class="panel-body">
+    <div *ngFor="let c of comments">
+      <div class="messageMe" *ngIf="c.employeeId == currentUser" >
+        <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt="" />
+        <span>{{c.comment}}</span>
+        <div class="msgDate right-align my">me: {{c.createdAt|date}}</div>
+        <div class="clearFix"></div>
+      </div>
+      <div class="messageHer" *ngIf="c.employeeId != currentUser">
+        <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt="" />
+        <span>{{c.comment}}</span>
+        <div class="msgDate"><span *ngIf="c.employeeName">{{c.employeeName}}</span><span *ngIf="c.parentName">{{c.parentName}}</span>: {{c.createdAt|date}}</div>
+        <div class="clearFix"></div>
+      </div>
+    </div>
+    <div class="clearFix"></div>
+  </div>
+  <div class="panel-footer">
+    <textarea name="textMessage" cols="0" rows="0"></textarea>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+import { Injectable, EventEmitter } from '@angular/core';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+import { Configuration } from './app.constant';
+import { CustomHttpService } from './default.header.service';
+
+
+@Injectable()
+export class ComplaintService {
+  private baseUrl: string = "";
+  constructor(public con: Configuration,
+    public http: CustomHttpService) {
+    this.baseUrl = con.Server;
+  }
+  getComplaint(url, pageNo) {
+    return this.http.get(this.baseUrl + "/" + url + "/page/" + pageNo)
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  getComplaintById(id) {
+    return this.http.get(this.baseUrl + "/complaint/" + id)
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  getComplaintCommentById(complaintId) {
+    return this.http.get(this.baseUrl + "/complaint/" + complaintId + "/comment")
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  postComplaintComment(complaintId, comment) {
+    console.log("1", comment);
+    return this.http.post(this.baseUrl + "/complaint/" + complaintId + "/comment", { comment: comment })
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  updateComplaint(complaintId, complaint) {
+    return this.http.put(this.baseUrl + "/complaint/" + complaintId, complaint)
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  editInfo() {
+    return this.http.get(this.baseUrl + "/complaint/edit-info")
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  showToast(msg){
+    console.log(msg);
+  }
+
+  getUserId(){
+    return this.con.getUserId();
+  }
+
+  private extractData(res: Response) {
+    if (res.status === 204) { return res; }
+    let body = res.json();
+    return body || { };
+  }
+
+  private handleError(error: Response | any) {
+    let errMsg: string;
+    if (error instanceof Response) {
+      errMsg = `${error.status} - ${error.ok || 'Bad Request'}`;
+      if (error.status === 0) {
+        errMsg = `${error.status} - "No Internet"`;
+      }
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    return Observable.throw(errMsg);
+  }  
+}

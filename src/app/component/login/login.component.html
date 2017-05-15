@@ -1,0 +1,27 @@
+<div class="login-wrapper">
+	<div class="container">
+		<h1 style="color: white;font-weight: 500;">Cornerstone School</h1>		
+		<form class="form" [formGroup]="loginForm" (submit)="onSubmit()">
+			<input type="text" name='username' id='username' formControlName="username" class="user" placeholder="username"/>
+			<input type='password' name='password' id='password' formControlName="password" class="pass" placeholder="password"/>
+			<input type="submit" class="btn" value="Sign in" [disabled]="loginForm.invalid"/>
+			<div class="loader" *ngIf="loginStart"></div>
+			<div *ngIf="error">
+				<p style="color:red">Username or password invalid.</p>
+			</div>
+		</form>
+	</div>
+	
+	<ul class="bg-bubbles">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</div>
