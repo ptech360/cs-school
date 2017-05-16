@@ -117,7 +117,7 @@ htlm, body
 {
     padding: 0;
     margin: 0;
-    border: 1px solid #b2b2b2;
+    background:#edeff4;
     max-height: 75px;
     height: 75px;
 }
@@ -125,8 +125,12 @@ htlm, body
 {
     margin-bottom: -5px;
     resize: none;
-    width: 100%;
     height: 100%;
+    border: 2px solid gray;
+    border-radius: 25px !important;
+    margin: 0px 5px 5px 5px !important;
+    padding: 10px;
+    width: 100%;
 }
 
 /*---- Chat box messages css ----------*/
@@ -142,7 +146,6 @@ htlm, body
 .myText{
     display: -webkit-box;
     text-align: -webkit-right;
-    border: 2px solid black !important;
     background: white !important;
     padding: 4px;
     width: 70%;
@@ -166,8 +169,7 @@ htlm, body
 }
 .text{
     display: -webkit-box;
-    border: 2px solid black !important;
-    background: white !important;
+    background: #e2ffc7 !important;
     padding: 4px;
     width:70%;
     border-radius: 10px !important;
