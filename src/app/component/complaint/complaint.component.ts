@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ComplaintService } from '../../providers/complaint.service';
 
@@ -9,8 +9,8 @@ declare let $;
   templateUrl: './complaint.component.html',
   styleUrls: ['./complaint.component.css']
 })
-export class ComplaintComponent {
-  public complaints;
+export class ComplaintComponent implements OnInit,AfterViewInit{
+  private complaints;
   private comments;
   private EmptyComments;
   private complaintStatus;
@@ -39,11 +39,14 @@ export class ComplaintComponent {
       case '5': this.status = "Reopen"; break;
       case '6': this.status = "Satisfied"; break;
       default: this.status = "All"; break;
-    }
+    }  
+  }
+
+  ngOnInit(){ 
     this.fetchComplaints();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit() {    
     $('.panel.panel-chat').hide();
     $(".panel.panel-chat > .panel-heading > .chatMinimize").click(function () {
       if ($(this).parent().parent().hasClass('mini')) {
@@ -76,7 +79,8 @@ export class ComplaintComponent {
   }
 
   fetchComplaints() {
-    this.cs.getComplaint("complaint", this.currentPage).subscribe((res) => {
+    console.log("1111");
+    this.cs.getComplaint(this.url, this.currentPage).subscribe((res) => {
       if (res.status !== 204) {
         console.log(res);
         this.complaints = res;

@@ -42,4 +42,7 @@ export class AppComponent implements AfterViewInit{
         $("#wrapper").toggleClass("toggled");
     });
   }
+  logout(){
+    localStorage.clear();
+  }
 }

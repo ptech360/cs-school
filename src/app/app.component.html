@@ -212,7 +212,7 @@
                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                <li><a href="#/login" (click)="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                 </li>
               </ul>
               <!-- /.dropdown-user -->
@@ -239,6 +239,7 @@
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
+      <div style="display:none" GoogleChart></div>
       <router-outlet></router-outlet>
     </div>
     <!-- /#page-content-wrapper -->

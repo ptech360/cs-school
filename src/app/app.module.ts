@@ -19,6 +19,7 @@ import { MessageComponent } from './component/message/message.component';
 import { PollComponent } from './component/poll/poll.component';
 import { SuggestionComponent } from './component/suggestion/suggestion.component';
 import { SurveyComponent } from './component/survey/survey.component';
+import { GoogleChart } from './customComponent/chart.directive';
 
 import { LoggedInGuard } from './component/login/login.gaurd';
 import { CustomHttpService } from './providers/default.header.service';
@@ -26,6 +27,7 @@ import { CommonService } from './providers/common.service';
 import { Configuration } from './providers/app.constant';
 import { AuthService } from './providers/auth.service';
 import { ComplaintService } from './providers/complaint.service';
+import { ChartService } from './providers/chart.service';
 import {XHRBackend, RequestOptions} from '@angular/http';
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import {XHRBackend, RequestOptions} from '@angular/http';
     MessageComponent,
     PollComponent,
     SuggestionComponent,
-    SurveyComponent
+    SurveyComponent,
+    GoogleChart
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,7 @@ import {XHRBackend, RequestOptions} from '@angular/http';
     HttpModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: true })
   ],
-  providers: [LoggedInGuard,Configuration,CommonService,CustomHttpService,AuthService,ComplaintService,
+  providers: [LoggedInGuard,Configuration,CommonService,CustomHttpService,AuthService,ComplaintService,ChartService,
   {
       provide: CustomHttpService,
       useFactory: (backend: XHRBackend, defaultOptions: RequestOptions) => {
