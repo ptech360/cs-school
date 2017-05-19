@@ -232,8 +232,7 @@
             </div>
           </div>
         </li>
-        <li *ngFor="let page of pages;" class="sidebar-items">
-          
+        <li *ngFor="let page of pages;" class="sidebar-items">          
           <a [routerLink]="['/'+page.url]" routerLinkActive="active">
           <img class="sidebar-icon" src="{{page.icon}}">
           {{page.title}}</a>
