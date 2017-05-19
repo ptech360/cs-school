@@ -67,18 +67,26 @@
   </div>
   <div class="panel-body">
     <div *ngFor="let c of comments">
-      <div class="messageMe" *ngIf="c.employeeId == currentUser" >
-        <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt="" />
-        <span>{{c.comment}}</span>
-        <div class="msgDate right-align my">me: {{c.createdAt|date}}</div>
-        <div class="clearFix"></div>
-      </div>
-      <div class="messageHer" *ngIf="c.employeeId != currentUser">
-        <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt="" />
-        <span>{{c.comment}}</span>
-        <div class="msgDate"><span *ngIf="c.employeeName">{{c.employeeName}}</span><span *ngIf="c.parentName">{{c.parentName}}</span>: {{c.createdAt|date}}</div>
-        <div class="clearFix"></div>
-      </div>
+          <div *ngIf="c.employeeId == currentUser" >
+              <div class="myMsg">
+                <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class="myImg" />
+                <div class="myText">{{c.comment}}</div>
+              </div>
+              <div class="myMsgDate">
+                me: {{c.createdAt|date}}
+              </div>
+          </div>
+          <div *ngIf="c.employeeId != currentUser">
+            <div class="msg">
+              <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class="img"/>
+              <span class="text">{{c.comment}}</span>
+            </div>
+            <div class="msgDate">
+              <span *ngIf="c.employeeName">{{c.employeeName}}</span>
+              <span *ngIf="c.parentName">{{c.parentName}}</span>
+              <span>: {{c.createdAt|date}}</span>
+            </div>            
+          </div>
     </div>
     <div class="clearFix"></div>
   </div>

@@ -16,34 +16,34 @@ export class ComplaintService {
     this.baseUrl = con.Server;
   }
   getComplaint(url, pageNo) {
-    return this.http.get(this.baseUrl + "/" + url + "/page/" + pageNo)
-    .map(this.extractData)
-    .catch(this.handleError);
+    return this.http.get(this.baseUrl + url + "/page/" + pageNo)
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
-  getComplaintById(id) {
-    return this.http.get(this.baseUrl + "/complaint/" + id)
-    .map(this.extractData)
-    .catch(this.handleError);
+  getComplaintById(url, id) {
+    return this.http.get(this.baseUrl + "/" + url + id)
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
-  getComplaintCommentById(complaintId) {
-    return this.http.get(this.baseUrl + "/complaint/" + complaintId + "/comment")
-    .map(this.extractData)
-    .catch(this.handleError);
+  getComplaintCommentById(url, complaintId) {
+    return this.http.get(this.baseUrl + url + "/" +complaintId + "/comment")
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
-  postComplaintComment(complaintId, comment) {
+  postComplaintComment(url, complaintId, comment) {
     console.log("1", comment);
-    return this.http.post(this.baseUrl + "/complaint/" + complaintId + "/comment", { comment: comment })
-    .map(this.extractData)
-    .catch(this.handleError);
+    return this.http.post(this.baseUrl + url + complaintId + "/comment", { comment: comment })
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
-  updateComplaint(complaintId, complaint) {
-    return this.http.put(this.baseUrl + "/complaint/" + complaintId, complaint)
-    .map(this.extractData)
-    .catch(this.handleError);
+  updateComplaint(url, complaintId, complaint) {
+    return this.http.put(this.baseUrl + url + complaintId, complaint)
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
   editInfo() {
@@ -52,18 +52,18 @@ export class ComplaintService {
       .catch(this.handleError);
   }
 
-  showToast(msg){
+  showToast(msg) {
     console.log(msg);
   }
 
-  getUserId(){
+  getUserId() {
     return this.con.getUserId();
   }
 
   private extractData(res: Response) {
     if (res.status === 204) { return res; }
     let body = res.json();
-    return body || { };
+    return body || {};
   }
 
   private handleError(error: Response | any) {
@@ -77,5 +77,5 @@ export class ComplaintService {
       errMsg = error.message ? error.message : error.toString();
     }
     return Observable.throw(errMsg);
-  }  
+  }
 }

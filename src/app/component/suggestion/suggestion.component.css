@@ -1,0 +1,12 @@
+.suggestion > ul{
+  width: 100%;  
+}
+.suggestion > ul > li{
+  width:50%;
+}
+
+.suggestion > ul>li.active>a, .suggestion > ul>li.active>a:focus, .suggestion > ul>li.active>a:hover {
+    color: #f8f8f8;
+    cursor: pointer;
+    background-color: #337ab7;
+}

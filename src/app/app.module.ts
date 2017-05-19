@@ -20,6 +20,8 @@ import { PollComponent } from './component/poll/poll.component';
 import { SuggestionComponent } from './component/suggestion/suggestion.component';
 import { SurveyComponent } from './component/survey/survey.component';
 import { GoogleChart } from './customComponent/chart.directive';
+import { SuggestionForMe } from './component/suggestion/suggestion.forme';
+import { SuggestionByMe } from './component/suggestion/suggestion.byme';
 
 import { LoggedInGuard } from './component/login/login.gaurd';
 import { CustomHttpService } from './providers/default.header.service';
@@ -45,7 +47,9 @@ import {XHRBackend, RequestOptions} from '@angular/http';
     PollComponent,
     SuggestionComponent,
     SurveyComponent,
-    GoogleChart
+    GoogleChart,
+    SuggestionForMe,
+    SuggestionByMe
   ],
   imports: [
     BrowserModule,

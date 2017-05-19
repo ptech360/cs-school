@@ -42,7 +42,13 @@ export class DashboardComponent {
       case "complaint_chart_by_status":
         if (parts[0] == "slice") {
           this.zone.run(() => this.router.navigate(['/complaint/status/' + dataTable.getValue(parseInt(parts[1]), 2)]));
-
+        }
+        else if (parts[0] == "legendentry")
+          console.log("legendentry : " + parts[1]);
+        break;
+      case "EWNS_suggestion":
+        if (parts[0] == "slice") {
+          this.zone.run(() => this.router.navigate(['/suggestion/status/' + dataTable.getValue(parseInt(parts[1]), 2)]));
         }
         else if (parts[0] == "legendentry")
           console.log("legendentry : " + parts[1]);
@@ -78,6 +84,11 @@ export class DashboardComponent {
         }
         break;
     }
+  }
+
+  onResize(event) {
+    this.chartByStatus();
+    this.chartByCategoryAndStatus();
   }
 
   chartByStatus() {

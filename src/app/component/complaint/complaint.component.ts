@@ -9,23 +9,23 @@ declare let $;
   templateUrl: './complaint.component.html',
   styleUrls: ['./complaint.component.css']
 })
-export class ComplaintComponent implements OnInit,AfterViewInit{
-  private complaints;
-  private comments;
-  private EmptyComments;
-  private complaintStatus;
-  private complaintCategory;
-  private complaintsCOPY;
-  private EmptyComplaints: boolean = false;
-  private currentPage = 1;
-  private complaint = {
+export class ComplaintComponent implements OnInit, AfterViewInit {
+  public complaints;
+  public comments;
+  public EmptyComments;
+  public complaintStatus;
+  public complaintCategory;
+  public complaintsCOPY;
+  public EmptyComplaints: boolean = false;
+  public currentPage = 1;
+  public complaint = {
     title: ""
   }
-  private url: string = "";
-  private status: string = "";
+  public url: string = "";
+  public status: string = "";
   constructor(public cs: ComplaintService,
-    private router: Router,
-    private route: ActivatedRoute, ) {
+    public router: Router,
+    public route: ActivatedRoute, ) {
     this.url = this.router.url;
     this.route.params.subscribe(param => {
       if (param['statusId']) this.complaintStatus = param['statusId'];
@@ -39,14 +39,14 @@ export class ComplaintComponent implements OnInit,AfterViewInit{
       case '5': this.status = "Reopen"; break;
       case '6': this.status = "Satisfied"; break;
       default: this.status = "All"; break;
-    }  
+    }
   }
 
-  ngOnInit(){ 
+  ngOnInit() {
     this.fetchComplaints();
   }
 
-  ngAfterViewInit() {    
+  ngAfterViewInit() {
     $('.panel.panel-chat').hide();
     $(".panel.panel-chat > .panel-heading > .chatMinimize").click(function () {
       if ($(this).parent().parent().hasClass('mini')) {
@@ -67,8 +67,6 @@ export class ComplaintComponent implements OnInit,AfterViewInit{
           $('.panel.panel-chat > .panel-body').hide();
           $('.panel.panel-chat > .panel-footer').hide();
         }, 500);
-
-
       }
 
     });
@@ -78,8 +76,7 @@ export class ComplaintComponent implements OnInit,AfterViewInit{
     });
   }
 
-  fetchComplaints() {
-    console.log("1111");
+  public fetchComplaints() {
     this.cs.getComplaint(this.url, this.currentPage).subscribe((res) => {
       if (res.status !== 204) {
         console.log(res);
@@ -94,23 +91,23 @@ export class ComplaintComponent implements OnInit,AfterViewInit{
     });
   }
 
-  previousComplaint() {
+  public previousComplaint() {
     delete this.complaints;
     this.currentPage -= 1;
     this.fetchComplaints();
   }
 
-  nextComplaint() {
+  public nextComplaint() {
     delete this.complaints;
     this.currentPage += 1;
     this.fetchComplaints();
   }
 
-  loadComplaints() {
+  public loadComplaints() {
     this.complaints = this.complaintsCOPY;
   }
 
-  searchComplaints(ev: any) {
+  public searchComplaints(ev: any) {
     this.loadComplaints();
     let val = ev.target.value;
     if (val && val.trim() != '') {
@@ -120,23 +117,23 @@ export class ComplaintComponent implements OnInit,AfterViewInit{
     }
   }
 
-  complaintIdOfCommentModel;
-  complaintTitleOfCommentModel;
+  public complaintIdOfCommentModel;
+  public complaintTitleOfCommentModel;
   currentUser = this.cs.getUserId();
-  getComplaintCommentById(complaintId){
+  getComplaintCommentById(complaintId) {
     this.complaintIdOfCommentModel = complaintId;
     this.complaints.forEach(element => {
-      if(element['id'] == complaintId)
+      if (element['id'] == complaintId)
         this.complaintTitleOfCommentModel = element.title;
     });
 
-    this.cs.getComplaintCommentById(complaintId).subscribe((res) => {
+    this.cs.getComplaintCommentById(this.url, complaintId).subscribe((res) => {
       if (res.status === 204) {
         this.EmptyComments = true;
       } else {
         this.EmptyComments = false;
         this.comments = res;
-        console.log("comments",this.comments);
+        console.log("comments", this.comments);
       }
     }, (err) => {
       this.comments = [];
@@ -144,23 +141,22 @@ export class ComplaintComponent implements OnInit,AfterViewInit{
     });
   }
 
-  comment;
-  postComment(){
-    if(this.comment)
-    this.cs.postComplaintComment(this.complaintIdOfCommentModel,this.comment).subscribe((res) =>{
-      console.log("submited",res);
-      this.comment = "";
-    }, (err) => {
-      this.cs.showToast("Internal server error.. Try again later");
-    });
+  public comment;
+  public postComment() {
+    if (this.comment)
+      this.cs.postComplaintComment(this.url, this.complaintIdOfCommentModel, this.comment).subscribe((res) => {
+        console.log("submited", res);
+        this.comment = "";
+      }, (err) => {
+        this.cs.showToast("Internal server error.. Try again later");
+      });
   }
 
-  clearComment(){
+  public clearComment() {
     delete this.comments;
-  }  
+  }
 
-  openModal(complaint) {
-    console.log("asdfsd");
+  public openModal(complaint) {
     this.complaint = complaint;
     $('#modal1').modal('show');
   }

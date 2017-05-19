@@ -1,0 +1,10 @@
+<div class="suggestion">
+  <h3>Suggestions </h3>
+  <ul class="nav nav-tabs">
+    <li routerLinkActive="active"><a [routerLink]="['/suggestion/for-me']" >For me</a></li>
+    <li routerLinkActive="active"><a [routerLink]="['/suggestion/for-student']" >By me</a></li>
+  </ul>
+  <div class="tab-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

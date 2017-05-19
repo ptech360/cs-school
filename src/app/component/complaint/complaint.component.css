@@ -69,7 +69,7 @@ htlm, body
 .panel.panel-chat .panel-body::-webkit-scrollbar {
       display: none;
   }
-.panel.panel-chat .panel-body .messageMe
+/*.panel.panel-chat .panel-body .messageMe
 {
     border-bottom:1px dotted #b2b2b2;
 }
@@ -112,12 +112,12 @@ htlm, body
     height: 50px;
     width: 280px;
     word-break: break-all;
-}
+}*/
 .panel.panel-chat .panel-footer
 {
     padding: 0;
     margin: 0;
-    border: 1px solid #b2b2b2;
+    background:#edeff4;
     max-height: 75px;
     height: 75px;
 }
@@ -125,6 +125,58 @@ htlm, body
 {
     margin-bottom: -5px;
     resize: none;
-    width: 100%;
     height: 100%;
+    border: 2px solid gray;
+    border-radius: 25px !important;
+    margin: 0px 5px 5px 5px !important;
+    padding: 10px;
+    width: 100%;
+}
+
+/*---- Chat box messages css ----------*/
+.myMsg{
+    float:right;
+    width:100%;
+}
+.myImg{
+    float:right;
+    width: 60px;    
+    padding: 0px 5px 0px 5px;
+}
+.myText{
+    display: -webkit-box;
+    text-align: -webkit-right;
+    background: white !important;
+    padding: 4px;
+    width: 70%;
+    float: right;
+    border-radius: 10px !important;
+}
+.myMsgDate{
+    float:right;
+    margin: 0px 5px 10px 0px;
+    font-size: 10px;
+    color: gray;
+}
+.msg{
+    float:left;
+    width:100%;
+}
+.img{
+    float:left;
+    width: 60px;
+    padding: 0px 5px 0px 5px;
+}
+.text{
+    display: -webkit-box;
+    background: #e2ffc7 !important;
+    padding: 4px;
+    width:70%;
+    border-radius: 10px !important;
+}
+.msgDate{
+    float:left;
+    margin: 0px 0px 10px 5px;
+    font-size: 10px;
+    color: gray;
 }

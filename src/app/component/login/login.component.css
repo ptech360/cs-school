@@ -244,3 +244,13 @@ form button:hover {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+
+
+.logo{
+
+}
+.head-name{
+  color: #2f358f;
+  font-weight:bold !important;
+}
