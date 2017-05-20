@@ -123,14 +123,17 @@ htlm, body
 }
 .panel.panel-chat .panel-footer textarea
 {
-    margin-bottom: -5px;
-    resize: none;
-    height: 100%;
-    border: 2px solid gray;
-    border-radius: 25px !important;
-    margin: 0px 5px 5px 5px !important;
+    /* margin-bottom: -5px; */
+    /* resize: none; */
+    /* height: 100%; */
+    /* border: 2px solid white; */
+    border-radius: 10px !important;
+    /* margin: 0px 5px 5px 5px !important; */
     padding: 10px;
-    width: 100%;
+    width: 78%;
+    margin: 6px !important;
+    background: white;
+        border: 2px solid #4c4c4c;
 }
 
 /*---- Chat box messages css ----------*/
@@ -140,17 +143,24 @@ htlm, body
 }
 .myImg{
     float:right;
-    width: 60px;    
+    width: 60px;  
+    height: 50px;  
     padding: 0px 5px 0px 5px;
+    border-radius: 100% !important;    
 }
 .myText{
     display: -webkit-box;
     text-align: -webkit-right;
-    background: white !important;
     padding: 4px;
     width: 70%;
     float: right;
     border-radius: 10px !important;
+}
+.myText-style{
+    background: #e2ffc7 !important;
+    padding: 5px;
+    border-radius: 20px !important;
+    display: grid;
 }
 .myMsgDate{
     float:right;
@@ -165,18 +175,42 @@ htlm, body
 .img{
     float:left;
     width: 60px;
+    height: 50px;
     padding: 0px 5px 0px 5px;
+    border-radius: 100% !important;
 }
 .text{
     display: -webkit-box;
-    background: #e2ffc7 !important;
     padding: 4px;
     width:70%;
     border-radius: 10px !important;
+}
+.text-style{
+    background: white !important;
+    padding: 5px;
+    border-radius: 20px !important;
+    display: grid;
 }
 .msgDate{
     float:left;
     margin: 0px 0px 10px 5px;
     font-size: 10px;
     color: gray;
+}
+
+#chat > .panel-heading , #chat > .panel-footer{
+    background:#ea212e;
+}
+.send-button{
+    float:right;
+}
+
+
+.send-button > .btn{
+    background: white;
+    color: red;
+    border-radius: 100% !important;
+    margin-top:25%;
+    margin-right: 2px;
+    border: 2px solid #4c4c4c;
 }
