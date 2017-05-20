@@ -91,6 +91,7 @@ main{
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
     box-shadow: 0 0 30px black;
+    background:white;
 }
 
 #wrapper.toggled #sidebar-wrapper {
