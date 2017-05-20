@@ -228,12 +228,16 @@
         <li class="sidebar-header">
           <div class="profile-display">
             <div class="accBgImage">
-
+              <div class="padding">
+              <img class="profile-img" src="https://us.123rf.com/450wm/tsirik/tsirik1312/tsirik131200021/24503597-businesswoman-shows-thumb-up-in-circle.jpg?ver=6">
+              </div>
+              <div class="profile-name">
+                Name here
+              </div>
             </div>
           </div>
         </li>
         <li *ngFor="let page of pages;" class="sidebar-items">
-          
           <a [routerLink]="['/'+page.url]" routerLinkActive="active">
           <img class="sidebar-icon" src="{{page.icon}}">
           {{page.title}}</a>
