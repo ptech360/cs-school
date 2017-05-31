@@ -1,0 +1,14 @@
+body{
+    background: #ddd;
+}
+
+/* Modal */
+.modal-header{
+background: #ea212e;
+}
+.modal-title{
+    color:#fff;
+}
+.close{
+    color:white;
+}

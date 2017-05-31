@@ -20,7 +20,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let c of complaints; let i = index;">
-          <td (click)="openModal(c)" class="action"><span class="cid">{{c.id}}</span></td>
+          <td (click)="openModal(c)" class="action"><span class="cid"><a>{{c.id}}</a></span></td>
           <td>{{c.title}}</td>
           <td>{{c.studentName}} - {{c.studentStandardName}}</td>
           <td *ngIf="!complaintStatus"><span [style.background]="c.statusColor" class="badge">{{c.statusName}}</span></td>
@@ -33,6 +33,7 @@
     </table>
   </div>
   <div class="panel-footer">
+<<<<<<< HEAD
     <nav aria-label="Page navigation example">
       <ul class="pagination">
         <li class="page-item" [ngClass]="{'disabled': currentPage === 1}"><a class="page-link" (click)="previousComplaint()" >Previous</a></li>
@@ -44,6 +45,11 @@
     </nav>
     <!--<button (click)="previousComplaint()" class="btn nav-btn right" [disabled]="currentPage === 1">Previous</button>
     <button (click)="nextComplaint()" class="btn right nav-btn" [disabled]="EmptyComplaints">Next</button>    -->
+=======
+    
+    <button (click)="previousComplaint()" class="btn btn-danger nav-btn right" [disabled]="currentPage === 1">Previous</button>
+    <button (click)="nextComplaint()" class="btn btn-danger right nav-btn" [disabled]="EmptyComplaints">Next</button>    
+>>>>>>> b8f2b1bd076fbfcab5f0104f6f0ba974238b2085
   </div>
 </div>
 
@@ -60,7 +66,7 @@
         {{complaint}}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
 
@@ -78,8 +84,17 @@
     <div *ngFor="let c of comments">
           <div *ngIf="c.employeeId == currentUser" >
               <div class="myMsg">
+<<<<<<< HEAD
                 <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class="myImg" />
                 <div class="myText">{{c.comment}}</div>
+=======
+                <img src="http://www.clker.com/cliparts/f/8/a/6/1376432218623075512little%20girl%20dreaming-hi.png" class="myImg" />
+                <div class="myText">
+                  <span class="myText-style" >
+                    {{c.comment}}
+                  </span>
+                  </div>
+>>>>>>> b8f2b1bd076fbfcab5f0104f6f0ba974238b2085
               </div>
               <div class="myMsgDate">
                 me: {{c.createdAt|date}}
@@ -87,8 +102,17 @@
           </div>
           <div *ngIf="c.employeeId != currentUser">
             <div class="msg">
+<<<<<<< HEAD
               <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class="img"/>
               <span class="text">{{c.comment}}</span>
+=======
+              <img src="http://www.kpop-map.com/wp-content/uploads/2016/01/sm-rookies-kun-profile.jpg" class="img"/>
+              <div class="text">
+                <span class="text-style">
+                  {{c.comment}}
+                </span>    
+              </div>
+>>>>>>> b8f2b1bd076fbfcab5f0104f6f0ba974238b2085
             </div>
             <div class="msgDate">
               <span *ngIf="c.employeeName">{{c.employeeName}}</span>
@@ -101,5 +125,8 @@
   </div>
   <div class="panel-footer">
     <textarea name="textMessage" cols="0" rows="0"></textarea>
+    <span class="send-button">
+        <button type="button" class="btn btn-success btn-circle btn-lg"><i class="glyphicon glyphicon-share-alt"></i></button>
+    </span>
   </div>
 </div>
