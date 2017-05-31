@@ -205,13 +205,20 @@ main{
 }
 
 .sidebar-header{
+/*<<<<<<< HEAD
+        height: 160px;
+=======*/
     height: 160px;
+/*>>>>>>> b8f2b1bd076fbfcab5f0104f6f0ba974238b2085*/
 }
 
 .profile-display{
     background: linear-gradient(to bottom, #f5959c 0%, #ea212e 100%);
+/*<<<<<<< HEAD
     height: 150px;
-    /*height: 160px;*/
+=======*/
+    height: 160px;
+/*>>>>>>> b8f2b1bd076fbfcab5f0104f6f0ba974238b2085*/
     display: block;
     margin-left: auto;
     margin-right: auto;    
@@ -219,6 +226,8 @@ main{
 .accBgImage{
     /*background-image: url(./svg/profile_background.svg) !important;*/
     background-size: 100% auto;
+/*<<<<<<< HEAD
+=======*/
 }
 .profile-img{
     width: 80px;
@@ -244,4 +253,5 @@ a{
 }
 a:hover{
     color: #ea212e;
+/*>>>>>>> b8f2b1bd076fbfcab5f0104f6f0ba974238b2085*/
 }
