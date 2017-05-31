@@ -1,0 +1,12 @@
+.homework > ul{
+  width: 100%;  
+}
+.homework > ul > li{
+  width:50%;
+}
+
+.homework > ul>li.active>a, .homework > ul>li.active>a:focus, .homework > ul>li.active>a:hover {
+    color: #f8f8f8;
+    cursor: pointer;
+    background-color: #337ab7;
+}

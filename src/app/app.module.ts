@@ -15,6 +15,8 @@ import { ComplaintComponent } from './component/complaint/complaint.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { EventComponent } from './component/events/event.component';
 import { HomeworkComponent } from './component/homework/homework.component';
+import { CurrentHomework } from './component/homework/current/homework';
+import { PassedHomework } from './component/homework/passed/homework';
 import { MessageComponent } from './component/message/message.component';
 import { PollComponent } from './component/poll/poll.component';
 import { SuggestionComponent } from './component/suggestion/suggestion.component';
@@ -29,6 +31,7 @@ import { CommonService } from './providers/common.service';
 import { Configuration } from './providers/app.constant';
 import { AuthService } from './providers/auth.service';
 import { ComplaintService } from './providers/complaint.service';
+import { HomeworkService } from './providers/homework.service';
 import { ChartService } from './providers/chart.service';
 import {XHRBackend, RequestOptions} from '@angular/http';
 @NgModule({
@@ -43,6 +46,8 @@ import {XHRBackend, RequestOptions} from '@angular/http';
     DashboardComponent,
     EventComponent,
     HomeworkComponent,
+    CurrentHomework,
+    PassedHomework,
     MessageComponent,
     PollComponent,
     SuggestionComponent,
@@ -59,6 +64,7 @@ import {XHRBackend, RequestOptions} from '@angular/http';
     RouterModule.forRoot(rootRouterConfig, { useHash: true })
   ],
   providers: [LoggedInGuard,Configuration,CommonService,CustomHttpService,AuthService,ComplaintService,ChartService,
+              HomeworkService,
   {
       provide: CustomHttpService,
       useFactory: (backend: XHRBackend, defaultOptions: RequestOptions) => {

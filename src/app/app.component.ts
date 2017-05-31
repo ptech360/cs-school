@@ -30,7 +30,7 @@ export class AppComponent implements AfterViewInit{
       { title: 'Poll', component: PollComponent, icon: 'icons/poll.png', url: 'poll' },
       { title: 'Survey', component: SurveyComponent, icon: 'icons/survey.png', url: 'survey' },
       { title: 'Circular', component: CircularComponent , icon: 'icons/homework.png', url: 'circular'},
-      { title: 'Homework', component: HomeworkComponent, icon: 'icons/circular.png', url: 'homework' }
+      { title: 'Homework', component: HomeworkComponent, icon: 'icons/circular.png', url: 'homework/current-homework' }
     ];
   constructor(public auth:AuthService, public log:LoggedInGuard){
     

@@ -33,8 +33,17 @@
     </table>
   </div>
   <div class="panel-footer">
-    <button (click)="previousComplaint()" class="btn nav-btn right" [disabled]="currentPage === 1">Previous</button>
-    <button (click)="nextComplaint()" class="btn right nav-btn" [disabled]="EmptyComplaints">Next</button>    
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item" [ngClass]="{'disabled': currentPage === 1}"><a class="page-link" (click)="previousComplaint()" >Previous</a></li>
+        <li class="page-item"><a class="page-link active" >1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item" [ngClass]="{'disabled': EmptyComplaints}"><a class="page-link" (click)="nextComplaint()" >Next</a></li>
+      </ul>
+    </nav>
+    <!--<button (click)="previousComplaint()" class="btn nav-btn right" [disabled]="currentPage === 1">Previous</button>
+    <button (click)="nextComplaint()" class="btn right nav-btn" [disabled]="EmptyComplaints">Next</button>    -->
   </div>
 </div>
 

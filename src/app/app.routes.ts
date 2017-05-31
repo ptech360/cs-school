@@ -7,6 +7,8 @@ import { ComplaintComponent } from './component/complaint/complaint.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { EventComponent } from './component/events/event.component';
 import { HomeworkComponent } from './component/homework/homework.component';
+import { CurrentHomework } from './component/homework/current/homework';
+import { PassedHomework } from './component/homework/passed/homework';
 import { MessageComponent } from './component/message/message.component';
 import { PollComponent } from './component/poll/poll.component';
 import { SuggestionComponent } from './component/suggestion/suggestion.component';
@@ -31,7 +33,12 @@ export const rootRouterConfig: Routes = [
   { path: 'appreciation', component: AppreciationComponent, canActivate: [LoggedInGuard] },
   { path: 'circular', component: CircularComponent, canActivate: [LoggedInGuard] },
   { path: 'planner', component: EventComponent, canActivate: [LoggedInGuard] },
-  { path: 'homework', component: HomeworkComponent, canActivate: [LoggedInGuard] },
+  { path: 'homework', component: HomeworkComponent, canActivate: [LoggedInGuard],
+    children:[
+      { path: 'current-homework', component:CurrentHomework, canActivate: [LoggedInGuard]},
+      { path:'passed-homework', component:PassedHomework, canActivate: [LoggedInGuard]}
+    ]
+  },
   { path: 'poll', component: PollComponent, canActivate: [LoggedInGuard] },
   { path: 'survey', component: SurveyComponent, canActivate: [LoggedInGuard] },
   { path: 'conversation', component: MessageComponent, canActivate: [LoggedInGuard] },

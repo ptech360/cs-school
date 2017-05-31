@@ -1,0 +1,10 @@
+<div class="homework">
+  <h3>Homeworks </h3>
+  <ul class="nav nav-tabs">
+    <li routerLinkActive="active"><a [routerLink]="['/homework/current-homework']" >CURRENT</a></li>
+    <li routerLinkActive="active"><a [routerLink]="['/homework/passed-homework']" >PAST</a></li>
+  </ul>
+  <div class="tab-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
