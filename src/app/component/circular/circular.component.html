@@ -1,0 +1,24 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Circulars<button type="button" class="btn-info pull-right" [routerLink]="['/add-circular']">New</button></div>
+
+  <!-- Table -->
+  <div class="panel-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Start At</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let circular of circulars" (click)="onCircularSelected($event)">
+          <td>circular.title</td>
+          <td>circular.description</td>
+          <td>circular.start</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
