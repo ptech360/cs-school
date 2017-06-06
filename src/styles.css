@@ -5,13 +5,10 @@ body{
 /* Modal */
 /*.modal-header{
 background: #ea212e;
-}
-.modal-title{
-    color:#fff;
-}
-.close{
-    color:white;
 }*/
+.modal-title{
+    float: left;
+}
 
 /*modal css*/
 .modal {
