@@ -25,9 +25,9 @@
           <td>{{c.studentName}} - {{c.studentStandardName}}</td>
           <td *ngIf="!complaintStatus"><span [style.background]="c.statusColor" class="badge">{{c.statusName}}</span></td>
           <td>{{c.priorityName}}</td>
-          <td *ngIf="!(complaintStatus == 4 || complaintStatus == 5)"><a (click)="openEditModal(c)" class="action"><i class="material-icons">create</i></a></td>
+          <td *ngIf="!(complaintStatus == 4 || complaintStatus == 5)"><a (click)="openEditModal(c)" class="action"><i class="glyphicon glyphicon-pencil"></i></a></td>
           <!--<td class="center-align"><a href="#chat" (click)="getComplaintCommentById(c.id)" class="action"><i class="material-icons">chat_bubble</i></a></td>-->
-          <td class="center-align"><a onclick="$('.panel.panel-chat').show();" (click)="getComplaintCommentById(c.id)" class="action"><i class="material-icons">chat_bubble</i></a></td>
+          <td class="center-align"><a onclick="$('.panel.panel-chat').show();" (click)="getComplaintCommentById(c.id)" class="action"><i class="glyphicon glyphicon-comment"></i></a></td>
         </tr>
         <tr [attr.id]="c.id" class="collapse">
           <td colspan="8" style="border:none;">
