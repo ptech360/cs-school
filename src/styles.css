@@ -3,7 +3,7 @@ body{
 }
 
 /* Modal */
-.modal-header{
+/*.modal-header{
 background: #ea212e;
 }
 .modal-title{
@@ -11,7 +11,7 @@ background: #ea212e;
 }
 .close{
     color:white;
-}
+}*/
 
 /*modal css*/
 .modal {
