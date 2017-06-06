@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ComplaintService } from '../../providers/complaint.service';
-
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 declare let $;
 
 @Component({
@@ -10,7 +10,12 @@ declare let $;
   styleUrls: ['./complaint.component.css']
 })
 export class ComplaintComponent implements OnInit, AfterViewInit {
+
+  public editForm: FormGroup;
+
   public complaints;
+  public employees = [];
+  public priorities = [];
   public comments;
   public EmptyComments;
   public complaintStatus;
@@ -44,6 +49,20 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.fetchComplaints();
+    this.getEditInfo();
+    this.loadForm();
+  }
+
+  public getEditInfo() {
+    this.cs.editInfo().subscribe(response => {
+      this.employees = response.employees;
+      this.priorities = response.priorities;
+    },
+      error => {
+        this.employees = [];
+        this.priorities = [];
+        console.log("error", error);
+      })
   }
 
   ngAfterViewInit() {
@@ -89,6 +108,43 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
     }, (err) => {
       this.complaints = [];
     });
+  }
+
+  public selectedComplaint;
+  public selectComplaint(complaint) {
+    this.selectedComplaint = complaint;
+    console.log("edit", complaint);
+    this.loadFormValue();
+  }
+
+  public updateComplaint(){
+    console.log(this.editForm.value);
+    if(this.editForm.value['statusId'])
+      this.editForm.value['statusId'] = 3;
+    else
+      delete this.editForm.value['statusId'];
+    // if(this.editForm.value['assignedTo'] == this.selectedComplaint.assignedEmployeeId)
+    //   delete this.editForm.value['assignedTo'];
+    // if(this.editForm.value['priorityId'] == this.selectedComplaint.priorityId)
+    //   delete this.editForm.value['priorityId'];
+    this.cs.updateComplaint(this.selectedComplaint.id, this.editForm.value).subscribe(response =>{
+      console.log("success", response);
+    },error =>{
+      console.log("error", error);
+    })
+  }
+
+  public loadForm() {
+    this.editForm = new FormGroup({
+      assignedTo: new FormControl(''),
+      priorityId: new FormControl(''),
+      statusId: new FormControl('')
+    })
+  }
+
+  public loadFormValue(){
+    this.editForm.patchValue({"assignedTo": this.selectedComplaint.assignedEmployeeId});
+    this.editForm.patchValue({"priorityId": this.selectedComplaint.priorityId});
   }
 
   public previousComplaint() {
