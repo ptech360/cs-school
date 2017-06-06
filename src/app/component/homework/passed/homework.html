@@ -2,13 +2,14 @@
   <div class="panel panel-default">
     <!--<div class="panel-heading">Current Homework</div>-->
     <div class="panel-body">
-      <table class="table table-hover">
+      <div style="text-align: center" *ngIf="EmptyHomeworks" ><b>No Homework</b></div>
+      <table class="table table-hover" *ngIf="!EmptyHomeworks">
         <thead>
           <tr>
             <th>Id</th>
             <th>Subject</th>
             <th>Created on</th>
-            <th>Created by</th>
+            <!--<th>Created by</th>-->
             <th>Due Date</th>            
           </tr>
         </thead>
@@ -17,18 +18,18 @@
             <td>{{a.id}}</td>
             <td>{{a.subjectName}}</td>
             <td>{{a.createdAt}}</td>
-            <td>{{ a.employeeName }}</td>
+            <!--<td>{{ a.employeeName }}</td>-->
             <td>{{a.dueDate}} {{a.dueMonth}}</td>
           </tr>
           <tr [attr.id]="a.id" class="collapse">
-            <td colspan="5" style="border:none;">
+            <td colspan="4" style="border:none;">
               <b>Description : </b>{{a.description}}
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="panel-footer">
+    <div class="panel-footer" *ngIf="!EmptyHomeworks">
       <nav aria-label="Page navigation example">
         <ul class="pagination">
           <li class="page-item" [ngClass]="{'disabled': currentPage === 1}"><a class="page-link" (click)="previousHomework()" >Previous</a></li>

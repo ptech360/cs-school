@@ -4,6 +4,8 @@ import { HomeworkService } from '../../../providers/homework.service';
 // import { CustomService } from '../../../providers/custom.service';
 import { CommonService } from '../../../providers/common.service';
 
+declare let $;
+
 @Component({
   selector: 'homework-add',
   templateUrl: 'add.html',
@@ -24,9 +26,10 @@ export class HomeworkAddComponent implements OnInit {
     this.initForm();
     this.getStandards();
   }
-
-  ionViewWillEnter() {
-    
+  file;
+  getFile(event){
+    this.file = event.srcElement.files[0];
+    console.log(this.file);
   }
 
   public initForm() {
@@ -34,7 +37,8 @@ export class HomeworkAddComponent implements OnInit {
       description: new FormControl('', [Validators.required, Validators.maxLength(250)]),
       standardId: new FormControl('', [Validators.required]),
       subjectId: new FormControl('', [Validators.required]),
-      dueDate: new FormControl(this.commonService.getTomorrow(), [Validators.required])
+      dueDate: new FormControl(this.commonService.getTomorrow(), [Validators.required]),
+      file: new FormControl('')
     });
   }
 
@@ -69,13 +73,14 @@ export class HomeworkAddComponent implements OnInit {
   }
 
   submitHomework(){
-    console.log(this.homework.value);
     let formData = new FormData();
     formData.append('description',this.homework.value['description']);
     formData.append('standardId',this.homework.value['standardId']);
     formData.append('subjectId',this.homework.value['subjectId']);
     formData.append('dueDate',this.homework.value['dueDate']);
-    this.saveHomework(formData);    
+    formData.append('file', this.file);
+    this.saveHomework(formData);  
+    console.log(formData);  
   }
 
   // public presentActionSheet() {
@@ -101,6 +106,8 @@ export class HomeworkAddComponent implements OnInit {
   public saveHomework(formData) {
     // this.nl.showLoader();
     this.homeworkService.PostHomework(formData).subscribe((data) => {
+      $('#homeworkModal').modal('show');
+      this.homework.reset();
       console.log(data);
       // this.nl.hideLoader();
       // this.viewCtrl.dismiss(data);

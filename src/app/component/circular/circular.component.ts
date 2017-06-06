@@ -15,7 +15,7 @@ export class CircularComponent implements OnInit {
   private EmptyCirculars: boolean = false;
 
   constructor(private circularService: CircularService) {
-
+    
   }
 
   ngOnInit() {
@@ -31,7 +31,6 @@ export class CircularComponent implements OnInit {
   }
 
   private onSuccess(data) {
-    console.log("asdf",data);
     if (data.status === 204) {
       this.EmptyCirculars = true;
     } else {

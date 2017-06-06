@@ -5,7 +5,8 @@
 
   <!-- Table -->
   <div class="panel-body">
-    <table class="table table-hover">
+    <div style="text-align: center" *ngIf="EmptyCirculars" ><b>No Circular added to View</b></div>
+    <table class="table table-hover" *ngIf="!EmptyCirculars" >
       <thead>
         <tr>
           <th>Title</th>

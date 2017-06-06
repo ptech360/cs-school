@@ -2,6 +2,9 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CircularService } from '../../../providers/circular.service';
 import { CommonService } from '../../../providers/common.service';
+
+declare let $;
+
 @Component({
   selector:'add-circular',
   templateUrl:'./add.html'
@@ -89,6 +92,7 @@ export class AddCircular implements OnInit, AfterViewInit{
 
   public onSubmit() {
     this.circserv.PostCircular(this.circular.value).subscribe((res) => {
+      $('#circularModal').modal('show');
       console.log("Circular created successfully");
     }, (err) => {
 
