@@ -18,9 +18,9 @@
           <th></th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let c of complaints; let i = index;">
-          <td (click)="openModal(c)" class="action"><span class="cid"><a>{{c.id}}</a></span></td>
+      <tbody *ngFor="let c of complaints; let i = index;">
+        <tr>
+          <td class="action" data-toggle="collapse" [attr.data-target]="'#' + c.id" data-parent="#accordion"><span class="cid"><a>{{c.id}}</a></span></td>
           <td>{{c.title}}</td>
           <td>{{c.studentName}} - {{c.studentStandardName}}</td>
           <td *ngIf="!complaintStatus"><span [style.background]="c.statusColor" class="badge">{{c.statusName}}</span></td>
@@ -28,6 +28,11 @@
           <td *ngIf="!(complaintStatus == 4 || complaintStatus == 5)"><a (click)="selectComplaint(c)" data-toggle="modal" data-target="#myModal" class="action"><i class="glyphicon glyphicon-pencil"></i></a></td>
           <!--<td class="center-align"><a href="#chat" (click)="getComplaintCommentById(c.id)" class="action"><i class="material-icons">chat_bubble</i></a></td>-->
           <td class="center-align"><a onclick="$('.panel.panel-chat').show();" (click)="getComplaintCommentById(c.id)" class="action"><i class="glyphicon glyphicon-comment"></i></a></td>
+        </tr>
+        <tr [attr.id]="c.id" class="collapse">
+          <td colspan="8" style="border:none;">
+            <b>Description : </b>{{c.description}}
+          </td>
         </tr>
       </tbody>
     </table>
