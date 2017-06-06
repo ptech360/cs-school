@@ -25,7 +25,7 @@
           <td>{{c.studentName}} - {{c.studentStandardName}}</td>
           <td *ngIf="!complaintStatus"><span [style.background]="c.statusColor" class="badge">{{c.statusName}}</span></td>
           <td>{{c.priorityName}}</td>
-          <td *ngIf="!(complaintStatus == 4 || complaintStatus == 5)"><a (click)="openEditModal(c)" class="action"><i class="glyphicon glyphicon-pencil"></i></a></td>
+          <td *ngIf="!(complaintStatus == 4 || complaintStatus == 5)"><a (click)="selectComplaint(c)" data-toggle="modal" data-target="#myModal" class="action"><i class="glyphicon glyphicon-pencil"></i></a></td>
           <!--<td class="center-align"><a href="#chat" (click)="getComplaintCommentById(c.id)" class="action"><i class="material-icons">chat_bubble</i></a></td>-->
           <td class="center-align"><a onclick="$('.panel.panel-chat').show();" (click)="getComplaintCommentById(c.id)" class="action"><i class="glyphicon glyphicon-comment"></i></a></td>
         </tr>
@@ -40,11 +40,11 @@
   <div class="panel-footer">
     <nav aria-label="Page navigation example">
       <ul class="pagination">
-        <li class="page-item" [ngClass]="{'disabled': currentPage === 1}"><a class="page-link" (click)="previousComplaint()" >Previous</a></li>
-        <li class="page-item"><a class="page-link active" >1</a></li>
+        <li class="page-item" [ngClass]="{'disabled': currentPage === 1}"><a class="page-link" (click)="previousComplaint()">Previous</a></li>
+        <li class="page-item"><a class="page-link active">1</a></li>
         <li class="page-item"><a class="page-link" href="#">2</a></li>
         <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item" [ngClass]="{'disabled': EmptyComplaints}"><a class="page-link" (click)="nextComplaint()" >Next</a></li>
+        <li class="page-item" [ngClass]="{'disabled': EmptyComplaints}"><a class="page-link" (click)="nextComplaint()">Next</a></li>
       </ul>
     </nav>
     <!--<button (click)="previousComplaint()" class="btn nav-btn right" [disabled]="currentPage === 1">Previous</button>
@@ -52,6 +52,53 @@
   </div>
 </div>
 
+<!-- Edit Modal -->
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Complaint</h4>
+      </div>
+      <form name="form1" [formGroup]="editForm" (submit)="updateComplaint()">
+      <div class="modal-body">
+        
+          <div class="form-group col-lg-5">
+            <label for="sel1">Assigned To:</label>
+            <select class="form-control" formControlName="assignedTo" >
+              <option *ngFor="let emp of employees" [value]="emp.id">{{emp.name}}</option>
+            </select>
+          </div>
+          
+          <div class="form-group col-lg-5">
+            <p><b>Priority:</b></p>
+            <div class="radio" *ngFor="let prio of priorities;">            
+              <label><input type="radio" name="priorityId" [value]="prio.id" formControlName="priorityId">{{prio.name}}</label>
+            </div>
+          </div>
+          <div class="form-group col-lg-5">
+            <p><b>Status:</b></p>
+            <div class="checkbox">
+              <label><input type="checkbox" name="progress" formControlName="statusId">In Progress</label>
+            </div>
+          </div>        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-right " data-dismiss="modal">Close</button>
+        <button type="reset" class="btn btn-default pull-right">Reset</button>
+        <button type="submit" class="btn btn-default pull-right">Submit</button>
+      </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<!--End of Edit-->
+<!--Modal-->
 <div id="modal1" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -81,34 +128,34 @@
   </div>
   <div class="panel-body">
     <div *ngFor="let c of comments">
-          <div *ngIf="c.employeeId == currentUser" >
-              <div class="myMsg">
-                <img src="http://www.clker.com/cliparts/f/8/a/6/1376432218623075512little%20girl%20dreaming-hi.png" class="myImg" />
-                <div class="myText">
-                  <span class="myText-style" >
+      <div *ngIf="c.employeeId == currentUser">
+        <div class="myMsg">
+          <img src="http://www.clker.com/cliparts/f/8/a/6/1376432218623075512little%20girl%20dreaming-hi.png" class="myImg" />
+          <div class="myText">
+            <span class="myText-style">
                     {{c.comment}}
                   </span>
-                  </div>
-              </div>
-              <div class="myMsgDate">
-                me: {{c.createdAt|date}}
-              </div>
           </div>
-          <div *ngIf="c.employeeId != currentUser">
-            <div class="msg">
-              <img src="http://www.kpop-map.com/wp-content/uploads/2016/01/sm-rookies-kun-profile.jpg" class="img"/>
-              <div class="text">
-                <span class="text-style">
+        </div>
+        <div class="myMsgDate">
+          me: {{c.createdAt|date}}
+        </div>
+      </div>
+      <div *ngIf="c.employeeId != currentUser">
+        <div class="msg">
+          <img src="http://www.kpop-map.com/wp-content/uploads/2016/01/sm-rookies-kun-profile.jpg" class="img" />
+          <div class="text">
+            <span class="text-style">
                   {{c.comment}}
-                </span>    
-              </div>
-            </div>
-            <div class="msgDate">
-              <span *ngIf="c.employeeName">{{c.employeeName}}</span>
-              <span *ngIf="c.parentName">{{c.parentName}}</span>
-              <span>: {{c.createdAt|date}}</span>
-            </div>            
+                </span>
           </div>
+        </div>
+        <div class="msgDate">
+          <span *ngIf="c.employeeName">{{c.employeeName}}</span>
+          <span *ngIf="c.parentName">{{c.parentName}}</span>
+          <span>: {{c.createdAt|date}}</span>
+        </div>
+      </div>
     </div>
     <div class="clearFix"></div>
   </div>

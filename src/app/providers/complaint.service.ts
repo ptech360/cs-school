@@ -40,8 +40,8 @@ export class ComplaintService {
       .catch(this.handleError);
   }
 
-  updateComplaint(url, complaintId, complaint) {
-    return this.http.put(this.baseUrl + url + complaintId, complaint)
+  updateComplaint(complaintId, complaint) {
+    return this.http.put(this.baseUrl + "/complaint/" + complaintId, complaint)
       .map(this.extractData)
       .catch(this.handleError);
   }
