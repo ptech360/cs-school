@@ -1,0 +1,33 @@
+<h3>Circulars</h3>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Circulars<button type="button" class="btn-info pull-right" [routerLink]="['/add-circular']">New</button></div>
+
+  <!-- Table -->
+  <div class="panel-body">
+    <div style="text-align: center" *ngIf="EmptyCirculars" ><b>No Circular added to View</b></div>
+    <table class="table table-hover" *ngIf="!EmptyCirculars" >
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Start At</th>
+          <th>Created By</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let circular of circulars">
+        <tr data-toggle="collapse" [attr.data-target]="'#' + circular.id">
+          <td>{{circular.title}}</td>
+          <td>{{circular.start}}</td>
+          <td>{{circular.employeeName}}</td>
+          <td><span [style.background]="circular.circularTypeColor" class="badge">{{circular.circularTypeName}}</span></td>
+        </tr>
+        <tr [attr.id]="circular.id" class="collapse">
+          <td colspan="5" style="border:none;">
+            <b>Description : </b>{{circular.description}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -11,10 +11,12 @@ import { ForgotPassword } from './component/login/forgot.password';
 import { HomeComponent } from './component/home/home.component';
 import { AppreciationComponent } from './component/appreciation/appreciation.component';
 import { CircularComponent } from './component/circular/circular.component';
+import { AddCircular } from './component/circular/add/add';
 import { ComplaintComponent } from './component/complaint/complaint.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { EventComponent } from './component/events/event.component';
 import { HomeworkComponent } from './component/homework/homework.component';
+import { HomeworkAddComponent } from './component/homework/add/add';
 import { CurrentHomework } from './component/homework/current/homework';
 import { PassedHomework } from './component/homework/passed/homework';
 import { MessageComponent } from './component/message/message.component';
@@ -33,6 +35,7 @@ import { AuthService } from './providers/auth.service';
 import { ComplaintService } from './providers/complaint.service';
 import { HomeworkService } from './providers/homework.service';
 import { ChartService } from './providers/chart.service';
+import { CircularService } from './providers/circular.service';
 import {XHRBackend, RequestOptions} from '@angular/http';
 @NgModule({
   declarations: [
@@ -41,11 +44,13 @@ import {XHRBackend, RequestOptions} from '@angular/http';
     ForgotPassword,
     HomeComponent,
     CircularComponent,
+    AddCircular,
     ComplaintComponent,
     AppreciationComponent,
     DashboardComponent,
     EventComponent,
     HomeworkComponent,
+    HomeworkAddComponent,
     CurrentHomework,
     PassedHomework,
     MessageComponent,
@@ -64,7 +69,7 @@ import {XHRBackend, RequestOptions} from '@angular/http';
     RouterModule.forRoot(rootRouterConfig, { useHash: true })
   ],
   providers: [LoggedInGuard,Configuration,CommonService,CustomHttpService,AuthService,ComplaintService,ChartService,
-              HomeworkService,
+              HomeworkService,CircularService,
   {
       provide: CustomHttpService,
       useFactory: (backend: XHRBackend, defaultOptions: RequestOptions) => {

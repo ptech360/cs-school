@@ -4,15 +4,14 @@ import { HomeworkService } from '../../../providers/homework.service';
 // import { CustomService } from '../../../providers/custom.service';
 
 @Component({
-  selector: 'homework-view',
+  selector: 'current-homework',
   templateUrl: 'homework.html',
-  styles: [`
-    ion-item div{font-size:1.4rem}
-  `]
+  styles: []
 })
 
 export class CurrentHomework implements OnInit {
 
+  public fileUrl : string = localStorage.getItem("fileUrl") + "/";
   public title: string = "Homework";
   public icon: string = "book";
   public currentPage = 1;

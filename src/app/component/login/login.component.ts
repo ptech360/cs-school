@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent{
   loginForm: FormGroup;
+  error:boolean = false;
   constructor(public formBuilder: FormBuilder,
               public appService: AuthService,
               public router: Router){
@@ -36,7 +37,7 @@ export class LoginComponent{
   }
 
   public verifyFailed(err) {
-    
+    this.error = true;
   }
 
   public getUserInfo() {

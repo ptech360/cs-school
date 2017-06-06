@@ -13,6 +13,7 @@ background: #ea212e;
     color:white;
 }
 
+<<<<<<< HEAD
 /* Active list color */
 ul.nav.nav-tabs{
     border: 1px solid #ea212e !important;
@@ -39,3 +40,24 @@ li.active a{
 a{
     color:#ea212e;
 }
+=======
+/*modal css*/
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+>>>>>>> a4895e42dc8ed0a632c6391c277b048e231b2467

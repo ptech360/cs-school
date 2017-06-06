@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Response, Http, Headers, RequestOptions } from '@angular/http';
+import { Response } from '@angular/http';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -10,12 +10,11 @@ import { Configuration } from './app.constant';
 import { CustomHttpService } from './default.header.service';
 
 @Injectable()
-export class HomeworkService {
+export class CircularService {
 
   public serverUrl: string;
 
   constructor(private http: CustomHttpService,
-              private htttp:Http,
               private con: Configuration) {
     this.getUrl();
   }
@@ -24,49 +23,31 @@ export class HomeworkService {
     this.serverUrl = this.con.Server;
   }
 
-  public getStandards() {
-    return this.http.get(this.serverUrl + '/homework/standard')
+  public GetCirculars(pageNo) {
+    return this.http.get(this.serverUrl + '/circular/page/' + pageNo)
                     .map(this.extractData)
                     .catch(this.handleError);
   }
 
-  public getSubjects(stan) {
-    return this.http.get(this.serverUrl + "/homework/standard/" + stan + "/subject")
+  public GetparticularCircular(id) {
+    return this.http.get(this.serverUrl + '/circular/' + id)
                     .map(this.extractData)
                     .catch(this.handleError);
   }
 
-  public PostHomework(body) {
-    var options = new RequestOptions({
-      headers: new Headers({
-        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
-      })
-    });
-    return this.htttp.post(this.serverUrl + "/homework", body, options)
+  public PostCircular(data) {
+    return this.http.post(this.serverUrl + '/circular', data)
                     .map(this.extractData)
                     .catch(this.handleError);
   }
-
-  public getHomework(pageNo) {
-    return this.http.get(this.serverUrl + '/homework/page/' + pageNo)
-                    .map(this.extractData)
-                    .catch(this.handleError);
-  }
-
-  public getOldHomework(pageNo) {
-    return this.http.get(this.serverUrl + '/homework/old/page/' + pageNo)
-                    .map(this.extractData)
-                    .catch(this.handleError);
-  }
-
 
   private extractData(res: Response) {
-    if (res.status === 204) { return res; }
-    let body = res.json();
-    return body || {};
-  }
+		if (res.status === 204) { return res; }
+		let body = res.json();
+		return body || { };
+	}
 
-  private handleError(error: Response | any) {
+	private handleError(error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
       errMsg = `${error.status} - ${error.ok || ''}`;

@@ -3,10 +3,12 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './component/home/home.component';
 import { AppreciationComponent } from './component/appreciation/appreciation.component';
 import { CircularComponent } from './component/circular/circular.component';
+import { AddCircular } from './component/circular/add/add';
 import { ComplaintComponent } from './component/complaint/complaint.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { EventComponent } from './component/events/event.component';
 import { HomeworkComponent } from './component/homework/homework.component';
+import { HomeworkAddComponent } from './component/homework/add/add';
 import { CurrentHomework } from './component/homework/current/homework';
 import { PassedHomework } from './component/homework/passed/homework';
 import { MessageComponent } from './component/message/message.component';
@@ -32,13 +34,15 @@ export const rootRouterConfig: Routes = [
   // { path: 'edit/:complaint', component: EditComplaint},    
   { path: 'appreciation', component: AppreciationComponent, canActivate: [LoggedInGuard] },
   { path: 'circular', component: CircularComponent, canActivate: [LoggedInGuard] },
+  { path: 'add-circular', component:AddCircular, canActivate:[LoggedInGuard]},
   { path: 'planner', component: EventComponent, canActivate: [LoggedInGuard] },
   { path: 'homework', component: HomeworkComponent, canActivate: [LoggedInGuard],
-    children:[
+    children:[      
       { path: 'current-homework', component:CurrentHomework, canActivate: [LoggedInGuard]},
       { path:'passed-homework', component:PassedHomework, canActivate: [LoggedInGuard]}
     ]
   },
+  { path:'homework-add', component:HomeworkAddComponent, canActivate: [LoggedInGuard]},
   { path: 'poll', component: PollComponent, canActivate: [LoggedInGuard] },
   { path: 'survey', component: SurveyComponent, canActivate: [LoggedInGuard] },
   { path: 'conversation', component: MessageComponent, canActivate: [LoggedInGuard] },
