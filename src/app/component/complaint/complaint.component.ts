@@ -158,6 +158,7 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
 
   public openModal(complaint) {
     this.complaint = complaint;
+    console.log(this.complaint);
     $('#modal1').modal('show');
   }
 }
