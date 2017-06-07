@@ -30,8 +30,11 @@
           <td class="center-align"><a onclick="$('.panel.panel-chat').show();" (click)="getComplaintCommentById(c.id)" class="action"><i class="glyphicon glyphicon-comment"></i></a></td>
         </tr>
         <tr [attr.id]="c.id" class="collapse">
-          <td colspan="8" style="border:none;">
+          <td colspan="6" style="border:none;">
             <b>Description : </b>{{c.description}}
+          </td>
+          <td style="border:none;">
+            <button type="button" (click)="selectedComplaint = c" data-toggle="modal" data-target="#myModal3">Close</button>
           </td>
         </tr>
       </tbody>
@@ -113,10 +116,46 @@
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
+<<<<<<< HEAD
+=======
   </div>
 </div>
 
-<!--<!- chat -->
+<!-- Close Modal -->
+<div class="modal fade" id="myModal3" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Close Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Close Complaint </h4>
+      </div>
+      <form [formGroup]="closeForm" (submit)="closeComplaint()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="rootCause">Root Cause</label>
+            <textarea class="form-control" formControlName="rca" id="rootCause" rows="3" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="exampleTextarea">Comment</label>
+            <textarea class="form-control" formControlName="comment" id="commentClose" rows="3" required></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="Submit" class="btn btn-default">Submit</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+
+>>>>>>> 1e83349858cf90bd1291a90858fa96d4f76b474b
+  </div>
+</div>
+
+
+
+<!-- chat -->
 <div id="chat" class="panel panel-chat">
   <div class="panel-heading">
     <a href="#" class="chatMinimize" onclick="return false"><span>{{complaintTitleOfCommentModel | uppercase}}</span></a>

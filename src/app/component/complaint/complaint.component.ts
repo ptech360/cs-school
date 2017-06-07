@@ -12,7 +12,7 @@ declare let $;
 export class ComplaintComponent implements OnInit, AfterViewInit {
 
   public editForm: FormGroup;
-
+  public closeForm: FormGroup;
   public complaints;
   public employees = [];
   public priorities = [];
@@ -55,7 +55,11 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
     this.loadForm();
     this.commentForm = new FormGroup({
       comment: new FormControl("")
-    }); 
+    });
+    this.closeForm = new FormGroup({
+      rca: new FormControl(""),
+      comment: new FormControl("")
+    })
   }
 
   public getEditInfo() {
@@ -130,9 +134,11 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
     this.loadFormValue();
   }
 
-  public updateComplaint(){
+
+
+  public updateComplaint() {
     console.log(this.editForm.value);
-    if(this.editForm.value['statusId'])
+    if (this.editForm.value['statusId'])
       this.editForm.value['statusId'] = 3;
     else
       delete this.editForm.value['statusId'];
@@ -140,10 +146,10 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
     //   delete this.editForm.value['assignedTo'];
     // if(this.editForm.value['priorityId'] == this.selectedComplaint.priorityId)
     //   delete this.editForm.value['priorityId'];
-    this.cs.updateComplaint(this.selectedComplaint.id, this.editForm.value).subscribe(response =>{
+    this.cs.updateComplaint(this.selectedComplaint.id, this.editForm.value).subscribe(response => {
       console.log("success", response);
       $('#myModal').modal('hide');
-    },error =>{
+    }, error => {
       console.log("error", error);
     })
   }
@@ -156,10 +162,21 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
     })
   }
 
-  public loadFormValue(){
-    this.editForm.patchValue({"assignedTo": this.selectedComplaint.assignedEmployeeId});
-    this.editForm.patchValue({"priorityId": this.selectedComplaint.priorityId});
+  public loadFormValue() {
+    this.editForm.patchValue({ "assignedTo": this.selectedComplaint.assignedEmployeeId });
+    this.editForm.patchValue({ "priorityId": this.selectedComplaint.priorityId });
   }
+
+  public closeComplaint() {
+    this.cs.closeComplaint(this.selectedComplaint.id, this.closeForm.value).subscribe(response => {
+      console.log("success", response);
+      $('#myModal3').modal('hide');
+    }, error => {
+      console.log("error", error);
+    });
+  }
+
+
 
   public previousComplaint() {
     delete this.complaints;
@@ -178,7 +195,7 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
   }
 
   public resetComplaints() {
-   this.loadFormValue();
+    this.loadFormValue();
   }
 
   public searchComplaints(ev: any) {
@@ -214,7 +231,7 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
       this.cs.showToast("Internal server error.. Try again later");
     });
   }
-  
+
   public submitComment() {
     if (this.commentForm.value['comment'])
       this.cs.postComplaintComment(this.complaintIdOfCommentModel, this.commentForm.value).subscribe((res) => {
