@@ -19,7 +19,7 @@
           <th>Type</th>
         </tr>
       </thead>
-      <tbody *ngFor="let circular of circulars">
+      <tbody *ngFor="let circular of circulars" class="container-border"> 
         <tr data-toggle="collapse" [attr.data-target]="'#' + circular.id">
           <td>{{circular.title}}</td>
           <td>{{circular.start}}</td>

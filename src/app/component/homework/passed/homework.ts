@@ -4,7 +4,8 @@ import { HomeworkService } from '../../../providers/homework.service';
 
 @Component({
   selector: 'passed-homework',
-  templateUrl: 'homework.html'
+  templateUrl: 'homework.html',
+  styleUrls:['../homework.component.css'],
 })
 
 export class PassedHomework implements OnInit {
