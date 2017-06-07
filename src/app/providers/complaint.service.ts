@@ -16,6 +16,7 @@ export class ComplaintService {
     this.baseUrl = con.Server;
   }
   getComplaint(url, pageNo) {
+    this.baseUrl = this.con.Server;
     return this.http.get(this.baseUrl + url + "/page/" + pageNo)
       .map(this.extractData)
       .catch(this.handleError);
@@ -33,9 +34,9 @@ export class ComplaintService {
       .catch(this.handleError);
   }
 
-  postComplaintComment(url, complaintId, comment) {
-    console.log("1", comment);
-    return this.http.post(this.baseUrl + url + complaintId + "/comment", { comment: comment })
+  postComplaintComment(complaintId, comment) {
+    console.log("1", this.baseUrl);
+    return this.http.post(this.baseUrl + "/complaint/" + complaintId + "/comment", comment)
       .map(this.extractData)
       .catch(this.handleError);
   }
