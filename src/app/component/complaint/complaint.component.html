@@ -53,33 +53,32 @@
 </div>
 
 <!-- Edit Modal -->
-
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Complaint</h4>
+        <h4 class="modal-title" id="exampleModalLabel">Edit Complaint</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <form name="form1" [formGroup]="editForm" (submit)="updateComplaint()">
       <div class="modal-body">
         
-          <div class="form-group col-lg-5">
+          <div class="form-group">
             <label for="sel1">Assigned To:</label>
             <select class="form-control" formControlName="assignedTo" >
               <option *ngFor="let emp of employees" [value]="emp.id">{{emp.name}}</option>
             </select>
           </div>
           
-          <div class="form-group col-lg-5">
+          <div class="form-group">
             <p><b>Priority:</b></p>
             <div class="radio" *ngFor="let prio of priorities;">            
               <label><input type="radio" name="priorityId" [value]="prio.id" formControlName="priorityId">{{prio.name}}</label>
             </div>
           </div>
-          <div class="form-group col-lg-5">
+          <div class="form-group">
             <p><b>Status:</b></p>
             <div class="checkbox">
               <label><input type="checkbox" name="progress" formControlName="statusId">In Progress</label>
@@ -93,7 +92,6 @@
       </div>
       </form>
     </div>
-
   </div>
 </div>
 

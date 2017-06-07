@@ -107,8 +107,7 @@ export class HomeworkAddComponent implements OnInit {
     // this.nl.showLoader();
     this.homeworkService.PostHomework(formData).subscribe((data) => {
       $('#homeworkModal').modal('show');
-      this.homework.reset();
-      console.log(data);
+      this.initForm();
       // this.nl.hideLoader();
       // this.viewCtrl.dismiss(data);
       // this.nl.showToast("Homework created successfully");

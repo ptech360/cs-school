@@ -10,7 +10,6 @@ background: #ea212e;
     float: left;
 }
 
-<<<<<<< HEAD
 /* Active list color */
 ul.nav.nav-tabs{
     border: 1px solid #ea212e !important;
@@ -37,7 +36,7 @@ li.active a{
 a{
     color:#ea212e;
 }
-=======
+
 /*modal css*/
 .modal {
   text-align: center;
@@ -57,4 +56,4 @@ a{
   text-align: left;
   vertical-align: middle;
 }
->>>>>>> a4895e42dc8ed0a632c6391c277b048e231b2467
+

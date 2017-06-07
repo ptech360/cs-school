@@ -9,7 +9,7 @@
             <th>Id</th>
             <th>Subject</th>
             <th>Created on</th>
-            <!--<th>Created by</th>-->
+            <th>Standard</th>
             <th>Due Date</th>            
           </tr>
         </thead>
@@ -17,8 +17,8 @@
           <tr data-toggle="collapse" [attr.data-target]="'#' + a.id" data-parent="#accordion">
             <td>{{a.id}}</td>
             <td>{{a.subjectName}}</td>
-            <td>{{a.createdAt}}</td>
-            <!--<td>{{ a.employeeName }}</td>-->
+            <td>{{a.createdAt | date: 'shortDate'}}</td>
+            <td>{{ a.standardName }}</td>
             <td>{{a.dueDate}} {{a.dueMonth}}</td>
           </tr>
           <tr [attr.id]="a.id" class="collapse">
