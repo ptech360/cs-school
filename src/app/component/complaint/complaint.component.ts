@@ -16,13 +16,14 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
   public complaints;
   public employees = [];
   public priorities = [];
-  public comments;
+  public comments = [];
   public commentForm: FormGroup;
   public EmptyComments;
   public complaintStatus;
   public complaintCategory;
   public complaintsCOPY;
   public EmptyComplaints: boolean = false;
+  public loader:boolean = false;
   public currentPage = 1;
   public complaint = {
     title: ""
@@ -44,11 +45,11 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
       case '4': this.status = "Closed"; break;
       case '5': this.status = "Reopen"; break;
       case '6': this.status = "Satisfied"; break;
-      default: this.status = "All"; break;
+      default : this.status = "All"; break;
     }
   }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.fetchComplaints();
     this.getEditInfo();
     this.loadForm();
@@ -104,18 +105,27 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
   }
 
   public fetchComplaints() {
+    this.loader = true;
     this.cs.getComplaint(this.url, this.currentPage).subscribe((res) => {
-      if (res.status !== 204) {
-        console.log(res);
+      this.onSuccess(res);
+    }, (err) => {
+      this.onError(err);
+    });
+  }
+
+  public onSuccess(res) {
+    this.loader = false;
+    if (res.status !== 204) {
         this.complaints = res;
         this.complaintsCOPY = res;
         this.EmptyComplaints = false;
       } else {
         this.EmptyComplaints = true;
       }
-    }, (err) => {
-      this.complaints = [];
-    });
+  }
+
+  public onError(err) {
+    this.complaints = [];
   }
 
   public selectedComplaint;
