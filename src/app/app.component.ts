@@ -20,7 +20,6 @@ declare let $;
 })
 export class AppComponent implements AfterViewInit{
   public pages = [
-      { title: 'Home', component: HomeComponent, icon: 'icons/home.png', url: 'home' },
       { title: 'Dashboard', component: DashboardComponent, icon: 'icons/dashboard.png', url: 'dashboard' },
       { title: 'Complaints', component: ComplaintComponent, icon: 'icons/complaint.png', url: 'complaint' },
       { title: 'Suggestions', component: SuggestionComponent, icon: 'icons/suggestion.png', url: 'suggestion/for-me' },

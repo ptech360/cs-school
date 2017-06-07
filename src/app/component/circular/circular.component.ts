@@ -3,7 +3,7 @@ import { CircularService } from '../../providers/circular.service';
 @Component({
   selector:'circular',
   templateUrl:'./circular.component.html',
-  styleUrls:[]
+  styleUrls:['./circular.component.css']
 })
 export class CircularComponent implements OnInit {
 
