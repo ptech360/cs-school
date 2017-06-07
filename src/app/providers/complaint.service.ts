@@ -47,6 +47,12 @@ export class ComplaintService {
       .catch(this.handleError);
   }
 
+  closeComplaint(complaintId, complaint) {
+    return this.http.put(this.baseUrl + "/complaint/" + complaintId + "/close", complaint)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   editInfo() {
     return this.http.get(this.baseUrl + "/complaint/edit-info")
       .map(this.extractData)

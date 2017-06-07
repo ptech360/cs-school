@@ -12,7 +12,7 @@ declare let $;
 export class ComplaintComponent implements OnInit, AfterViewInit {
 
   public editForm: FormGroup;
-
+  public closeForm: FormGroup;
   public complaints;
   public employees = [];
   public priorities = [];
@@ -55,6 +55,10 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
     this.commentForm = new FormGroup({
       comment: new FormControl("")
     }); 
+    this.closeForm = new FormGroup ({
+      rca: new FormControl(""),
+      comment: new FormControl("")
+    })
   }
 
   public getEditInfo() {
@@ -117,9 +121,10 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
   public selectedComplaint;
   public selectComplaint(complaint) {
     this.selectedComplaint = complaint;
-    console.log("edit", complaint);
     this.loadFormValue();
   }
+
+
 
   public updateComplaint(){
     console.log(this.editForm.value);
@@ -151,7 +156,20 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
     this.editForm.patchValue({"assignedTo": this.selectedComplaint.assignedEmployeeId});
     this.editForm.patchValue({"priorityId": this.selectedComplaint.priorityId});
   }
+ 
+ public closeComplaint()
+ {
+   this.cs.closeComplaint(this.selectedComplaint.id, this.closeForm.value).subscribe(response => {
+     console.log("success",response);
+     $('#myModal3').modal('hide');
+   }, error => {
+     console.log("error", error);
+   });
+}
+   
 
+ 
+ 
   public previousComplaint() {
     delete this.complaints;
     this.currentPage -= 1;
