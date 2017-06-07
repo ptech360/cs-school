@@ -28,10 +28,12 @@ export class Configuration {
   getRole() {
     this.role = localStorage.getItem("role");
     this.getUserId();
+    return this.role;
   }
 
   getUserId() {
     this.userId = localStorage.getItem("id");
     this.Server = this.baseUrl + this.role + "/" + this.userId;
+    return this.userId;
   }
 }

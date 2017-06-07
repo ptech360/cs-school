@@ -87,7 +87,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-right " data-dismiss="modal">Close</button>
-        <button type="reset" class="btn btn-default pull-right">Reset</button>
+        <button type="button" class="btn btn-default pull-right" (click)="resetComplaints()" >Reset</button>
         <button type="submit" class="btn btn-default pull-right">Submit</button>
       </div>
       </form>
@@ -158,9 +158,11 @@
     <div class="clearFix"></div>
   </div>
   <div class="panel-footer">
-    <textarea name="textMessage" cols="0" rows="0"></textarea>
+    <form [formGroup] = "commentForm" (submit)="submitComment()">
+    <textarea name="comment" formControlName ="comment" cols="0" rows="0"></textarea>
     <span class="send-button">
-        <button type="button" class="btn btn-success btn-circle btn-lg"><i class="glyphicon glyphicon-share-alt"></i></button>
+        <button type="submit" class="btn btn-success btn-circle btn-lg"><i class="glyphicon glyphicon-share-alt"></i></button>
     </span>
+    </form>
   </div>
 </div>

@@ -17,6 +17,7 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
   public employees = [];
   public priorities = [];
   public comments;
+  public commentForm: FormGroup;
   public EmptyComments;
   public complaintStatus;
   public complaintCategory;
@@ -51,6 +52,9 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
     this.fetchComplaints();
     this.getEditInfo();
     this.loadForm();
+    this.commentForm = new FormGroup({
+      comment: new FormControl("")
+    }); 
   }
 
   public getEditInfo() {
@@ -129,6 +133,7 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
     //   delete this.editForm.value['priorityId'];
     this.cs.updateComplaint(this.selectedComplaint.id, this.editForm.value).subscribe(response =>{
       console.log("success", response);
+      $('#myModal').modal('hide');
     },error =>{
       console.log("error", error);
     })
@@ -161,6 +166,10 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
 
   public loadComplaints() {
     this.complaints = this.complaintsCOPY;
+  }
+
+  public resetComplaints() {
+   this.loadFormValue();
   }
 
   public searchComplaints(ev: any) {
@@ -196,13 +205,15 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
       this.cs.showToast("Internal server error.. Try again later");
     });
   }
-
-  public comment;
-  public postComment() {
-    if (this.comment)
-      this.cs.postComplaintComment(this.url, this.complaintIdOfCommentModel, this.comment).subscribe((res) => {
+  
+  public submitComment() {
+    if (this.commentForm.value['comment'])
+      this.cs.postComplaintComment(this.complaintIdOfCommentModel, this.commentForm.value).subscribe((res) => {
+        this.commentForm.value['employeeId'] = this.currentUser;
+        this.commentForm.value['createdAt'] = new Date();
+        this.comments.push(this.commentForm.value);
         console.log("submited", res);
-        this.comment = "";
+        this.commentForm.reset();
       }, (err) => {
         this.cs.showToast("Internal server error.. Try again later");
       });
