@@ -34,8 +34,8 @@
             <b>Description : </b>{{c.description}}
           </td>
           <td style="border:none;">
-             <button type="button" (click)="selectedComplaint = c" data-toggle="modal" data-target="#myModal3">Close</button>
-             </td>
+            <button type="button" (click)="selectedComplaint = c" data-toggle="modal" data-target="#myModal3">Close</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -66,18 +66,18 @@
         </button>
       </div>
       <form name="form1" [formGroup]="editForm" (submit)="updateComplaint()">
-      <div class="modal-body">
-        
+        <div class="modal-body">
+
           <div class="form-group">
             <label for="sel1">Assigned To:</label>
-            <select class="form-control" formControlName="assignedTo" >
+            <select class="form-control" formControlName="assignedTo">
               <option *ngFor="let emp of employees" [value]="emp.id">{{emp.name}}</option>
             </select>
           </div>
-          
+
           <div class="form-group">
             <p><b>Priority:</b></p>
-            <div class="radio" *ngFor="let prio of priorities;">            
+            <div class="radio" *ngFor="let prio of priorities;">
               <label><input type="radio" name="priorityId" [value]="prio.id" formControlName="priorityId">{{prio.name}}</label>
             </div>
           </div>
@@ -86,18 +86,15 @@
             <div class="checkbox">
               <label><input type="checkbox" name="progress" formControlName="statusId">In Progress</label>
             </div>
-          </div>        
-      </div>
-      <div class="modal-footer">
-<<<<<<< HEAD
-        <button type="reset" class="btn btn-success pull-right">Reset</button>
-        <button type="submit" class="btn btn-success pull-right">Submit</button>
-=======
-        <button type="button" class="btn btn-default pull-right " data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-default pull-right" (click)="resetComplaints()" >Reset</button>
-        <button type="submit" class="btn btn-default pull-right">Submit</button>
->>>>>>> a3c393f42322ede391685655dc7c0cbb41833085
-      </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <<<<<<< HEAD <button type="reset" class="btn btn-success pull-right">Reset</button>
+            <button type="submit" class="btn btn-success pull-right">Submit</button> =======
+            <button type="button" class="btn btn-default pull-right " data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default pull-right" (click)="resetComplaints()">Reset</button>
+            <button type="submit" class="btn btn-default pull-right">Submit</button> >>>>>>> a3c393f42322ede391685655dc7c0cbb41833085
+        </div>
       </form>
     </div>
   </div>
@@ -124,36 +121,36 @@
   </div>
 </div>
 
-  <!-- Close Modal -->
-  <div class="modal fade" id="myModal3" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Close Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Close Complaint </h4>
-        </div>
-        <form [formGroup]="closeForm" (submit) = "closeComplaint()" >
+<!-- Close Modal -->
+<div class="modal fade" id="myModal3" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Close Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Close Complaint </h4>
+      </div>
+      <form [formGroup]="closeForm" (submit)="closeComplaint()">
         <div class="modal-body">
           <div class="form-group">
-    <label for="rootCause">Root Cause</label>
-    <textarea class="form-control" formControlName="rca" id="rootCause" rows="3" required></textarea>
-  </div>
-  <div class="form-group">
-    <label for="exampleTextarea">Comment</label>
-    <textarea class="form-control" formControlName="comment" id="commentClose" rows="3" required></textarea>
-  </div>
+            <label for="rootCause">Root Cause</label>
+            <textarea class="form-control" formControlName="rca" id="rootCause" rows="3" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="exampleTextarea">Comment</label>
+            <textarea class="form-control" formControlName="comment" id="commentClose" rows="3" required></textarea>
+          </div>
         </div>
         <div class="modal-footer">
-          <button type="Submit" class="btn btn-default" >Submit</button>
+          <button type="Submit" class="btn btn-default">Submit</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
-        </form>
-      </div>
-      
+      </form>
     </div>
+
   </div>
+</div>
 
 
 
@@ -198,9 +195,9 @@
     <div class="clearFix"></div>
   </div>
   <div class="panel-footer">
-    <form [formGroup] = "commentForm" (submit)="submitComment()">
-    <textarea name="comment" formControlName ="comment" cols="0" rows="0"></textarea>
-    <span class="send-button">
+    <form [formGroup]="commentForm" (submit)="submitComment()">
+      <textarea name="comment" formControlName="comment" cols="0" rows="0"></textarea>
+      <span class="send-button">
         <button type="submit" class="btn btn-success btn-circle btn-lg"><i class="glyphicon glyphicon-share-alt"></i></button>
     </span>
     </form>
