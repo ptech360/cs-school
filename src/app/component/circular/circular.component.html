@@ -1,15 +1,16 @@
 <h3>Circulars
-<button type="button" class="btn btn-success btn-circle" [routerLink]="['/add-circular']">Add</button>
+<button type="button" class="btn btn-success btn-circle" [routerLink]="['/add-circular']">
+  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+</button>
 </h3>
 <div class="panel panel-default">
   <!-- Default panel contents -->
-  <div class="panel-heading">Circulars
-  </div>
+  <div class="panel-heading">Circulars</div>
 
   <!-- Table -->
   <div class="panel-body">
-    <div style="text-align: center" *ngIf="EmptyCirculars" ><b>No Circular added to View</b></div>
-    <table class="table table-hover" *ngIf="!EmptyCirculars" >
+    <div style="text-align: center" *ngIf="EmptyCirculars"><b>No Circular added to View</b></div>
+    <table class="table table-hover" *ngIf="!EmptyCirculars">
       <thead>
         <tr>
           <th>Title</th>
