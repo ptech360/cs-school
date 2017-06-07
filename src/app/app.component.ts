@@ -22,12 +22,12 @@ export class AppComponent implements AfterViewInit{
   public pages = [
       { title: 'Dashboard', component: DashboardComponent, icon: 'icons/dashboard.png', url: 'dashboard' },
       { title: 'Complaints', component: ComplaintComponent, icon: 'icons/complaint.png', url: 'complaint' },
-      { title: 'Suggestions', component: SuggestionComponent, icon: 'icons/suggestion.png', url: 'suggestion/for-me' },
-      { title: 'Appreciations', component: AppreciationComponent, icon: 'icons/appreciation.png', url: 'appreciation' },
-      { title: 'Messaging', component: MessageComponent, icon: 'icons/message.png', url: 'conversation' },
-      { title: 'Events', component: EventComponent, icon: 'icons/event.png', url: 'planner' },
-      { title: 'Poll', component: PollComponent, icon: 'icons/poll.png', url: 'poll' },
-      { title: 'Survey', component: SurveyComponent, icon: 'icons/survey.png', url: 'survey' },
+      // { title: 'Suggestions', component: SuggestionComponent, icon: 'icons/suggestion.png', url: 'suggestion/for-me' },
+      // { title: 'Appreciations', component: AppreciationComponent, icon: 'icons/appreciation.png', url: 'appreciation' },
+      // { title: 'Messaging', component: MessageComponent, icon: 'icons/message.png', url: 'conversation' },
+      // { title: 'Events', component: EventComponent, icon: 'icons/event.png', url: 'planner' },
+      // { title: 'Poll', component: PollComponent, icon: 'icons/poll.png', url: 'poll' },
+      // { title: 'Survey', component: SurveyComponent, icon: 'icons/survey.png', url: 'survey' },
       { title: 'Circular', component: CircularComponent , icon: 'icons/circular.png', url: 'circular'},
       { title: 'Homework', component: HomeworkComponent, icon: 'icons/homework.png', url: 'homework/current-homework' }
     ];
