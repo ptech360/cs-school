@@ -25,12 +25,23 @@
           <td>{{c.studentName}} - {{c.studentStandardName}}</td>
           <td *ngIf="!complaintStatus"><span [style.background]="c.statusColor" class="badge">{{c.statusName}}</span></td>
           <td>{{c.priorityName}}</td>
-          <td *ngIf="!(complaintStatus == 4 || complaintStatus == 5)"><a [ngClass]="{'disabled-click' : c.statusId == 4}" (click)="selectComplaint(c,in)" data-toggle="modal" data-target="#myModal" class="action"><i class="glyphicon glyphicon-pencil"></i></a></td>
-          <td class="center-align"><a onclick="$('.panel.panel-chat').show();" (click)="getComplaintCommentById(c.id)" class="action"><i class="glyphicon glyphicon-comment"></i></a></td>
+          <td *ngIf="!(complaintStatus == 4 || complaintStatus == 5)"><a [ngClass]="{'disabled-click' : c.statusId == 4}" (click)="selectComplaint(c,in)" data-toggle="modal" data-target="#myModal"
+              class="action"><i class="glyphicon glyphicon-pencil"></i></a></td>
+          <td class="center-align"><a onclick="$('.panel.panel-chat').show();" (click)="getComplaintCommentById(c)" class="action"><i class="glyphicon glyphicon-comment"></i></a></td>
         </tr>
         <tr [attr.id]="c.id" class="collapse">
           <td colspan="6" style="border:none;">
             <b>Description : </b>{{c.description}}
+            <p *ngIf="c.closedOn">
+              <b>Closed On : </b> {{c.closedOn | date: "shortDate"}} <br/>
+              <b>Root Cause : </b> {{c.rca}}
+            </p>
+            <p *ngIf="c.againstCategoryName">
+              <b>Complaint Against : </b> {{c.againstCategoryName}}
+            </p>
+            <p *ngIf="c.againstEmployeeName">
+              <b>Complaint Against : </b> {{c.againstEmployeeName}}
+            </p>
           </td>
           <td style="border:none;">
             <button type="button" *ngIf="c.statusId != 4" (click)="selectedComplaint = c; selectedIndex = in;" data-toggle="modal" data-target="#myModal3">Close</button>
@@ -89,8 +100,8 @@
           </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-right" (click)="resetComplaints()">Reset</button>
-            <button type="submit" class="btn btn-default pull-right">Submit</button>
+          <button type="button" class="btn btn-default pull-right" (click)="resetComplaints()">Reset</button>
+          <button type="submit" class="btn btn-default pull-right">Submit</button>
         </div>
       </form>
     </div>
@@ -174,7 +185,7 @@
     </div>
     <div class="clearFix"></div>
   </div>
-  <div class="panel-footer">
+  <div *ngIf="closedOn" class="panel-footer">
     <form [formGroup]="commentForm" (submit)="submitComment()">
       <textarea name="comment" formControlName="comment" cols="0" rows="0"></textarea>
       <span class="send-button">
