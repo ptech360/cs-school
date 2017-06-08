@@ -9,6 +9,7 @@ declare let $;
 @Component({
   selector: 'homework-add',
   templateUrl: 'add.html',
+  
 })
 
 export class HomeworkAddComponent implements OnInit {

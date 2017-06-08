@@ -10,3 +10,14 @@
     cursor: pointer;
     background-color: #337ab7;
 }
+
+.container{
+	border-style: solid;
+	border-color: blue;
+}
+
+.homework-container{
+  width: 100%;
+  border-style: solid;
+  border-color:#cacacc;
+}
