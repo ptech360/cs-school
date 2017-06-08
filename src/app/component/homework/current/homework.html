@@ -15,7 +15,7 @@
         </thead>
         <tbody *ngFor="let a of homeworks; let i = index;">
           <tr data-toggle="collapse" [attr.data-target]="'#' + a.id" data-parent="#accordion">
-            <td>{{a.id}}</td>
+            <td class="action">{{a.id}}</td>
             <td>{{a.subjectName}}</td>
             <td>{{a.createdAt | date: 'shortDate'}}</td>
             <td>{{ a.standardName }}</td>
@@ -32,8 +32,12 @@
           </tr>
         </tbody>
       </table>
+      <div class="row text-center">
+        <loader [condition]="!homeworks"></loader>
+      </div>
     </div>
-    <div class="panel-footer" *ngIf="!EmptyHomeworks">
+    
+    <!--<div class="panel-footer" *ngIf="!EmptyHomeworks">
       <nav aria-label="Page navigation example">
         <ul class="pagination">
           <li class="page-item" [ngClass]="{'disabled': currentPage === 1}"><a class="page-link" (click)="previousHomework()" >Previous</a></li>
@@ -43,6 +47,6 @@
           <li class="page-item" [ngClass]="{'disabled': EmptyHomeworks}"><a class="page-link" (click)="nextHomework()" >Next</a></li>
         </ul>
       </nav>
-    </div>
+    </div>-->
   </div>
 </div>

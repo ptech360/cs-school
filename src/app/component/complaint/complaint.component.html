@@ -1,7 +1,7 @@
 <h3>Complaint Component</h3>
 <div class="panel panel-default">
   <!-- Default panel contents -->
-  <div class="panel-heading">All Complaints</div>
+  <div class="panel-heading">{{status}} Complaints</div>
 
   <!-- Table -->
   <div class="panel-body">
@@ -18,15 +18,14 @@
           <th></th>
         </tr>
       </thead>
-      <tbody *ngFor="let c of complaints; let i = index;">
+      <tbody *ngFor="let c of complaints; let in = index;">
         <tr>
           <td class="action" data-toggle="collapse" [attr.data-target]="'#' + c.id" data-parent="#accordion"><span class="cid"><a>{{c.id}}</a></span></td>
           <td>{{c.title}}</td>
           <td>{{c.studentName}} - {{c.studentStandardName}}</td>
           <td *ngIf="!complaintStatus"><span [style.background]="c.statusColor" class="badge">{{c.statusName}}</span></td>
           <td>{{c.priorityName}}</td>
-          <td *ngIf="!(complaintStatus == 4 || complaintStatus == 5)"><a (click)="selectComplaint(c)" data-toggle="modal" data-target="#myModal" class="action"><i class="glyphicon glyphicon-pencil"></i></a></td>
-          <!--<td class="center-align"><a href="#chat" (click)="getComplaintCommentById(c.id)" class="action"><i class="material-icons">chat_bubble</i></a></td>-->
+          <td *ngIf="!(complaintStatus == 4 || complaintStatus == 5)"><a [ngClass]="{'disabled-click' : c.statusId == 4}" (click)="selectComplaint(c,in)" data-toggle="modal" data-target="#myModal" class="action"><i class="glyphicon glyphicon-pencil"></i></a></td>
           <td class="center-align"><a onclick="$('.panel.panel-chat').show();" (click)="getComplaintCommentById(c.id)" class="action"><i class="glyphicon glyphicon-comment"></i></a></td>
         </tr>
         <tr [attr.id]="c.id" class="collapse">
@@ -34,7 +33,7 @@
             <b>Description : </b>{{c.description}}
           </td>
           <td style="border:none;">
-            <button type="button" (click)="selectedComplaint = c" data-toggle="modal" data-target="#myModal3">Close</button>
+            <button type="button" *ngIf="c.statusId != 4" (click)="selectedComplaint = c; selectedIndex = in;" data-toggle="modal" data-target="#myModal3">Close</button>
           </td>
         </tr>
       </tbody>

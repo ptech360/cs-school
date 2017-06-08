@@ -16,7 +16,7 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
   public complaints;
   public employees = [];
   public priorities = [];
-  public comments = [];
+  public comments;
   public commentForm: FormGroup;
   public EmptyComments;
   public complaintStatus;
@@ -129,12 +129,12 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
   }
 
   public selectedComplaint;
-  public selectComplaint(complaint) {
+  public selectedIndex;
+  public selectComplaint(complaint, index) {
     this.selectedComplaint = complaint;
+    this.selectedIndex = index;
     this.loadFormValue();
   }
-
-
 
   public updateComplaint() {
     console.log(this.editForm.value);
@@ -147,7 +147,7 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
     // if(this.editForm.value['priorityId'] == this.selectedComplaint.priorityId)
     //   delete this.editForm.value['priorityId'];
     this.cs.updateComplaint(this.selectedComplaint.id, this.editForm.value).subscribe(response => {
-      console.log("success", response);
+      this.complaints[this.selectedIndex] = response; 
       $('#myModal').modal('hide');
     }, error => {
       console.log("error", error);
@@ -169,7 +169,7 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
 
   public closeComplaint() {
     this.cs.closeComplaint(this.selectedComplaint.id, this.closeForm.value).subscribe(response => {
-      console.log("success", response);
+      this.complaints[this.selectedIndex] = response; 
       $('#myModal3').modal('hide');
     }, error => {
       console.log("error", error);
@@ -227,7 +227,7 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
         console.log("comments", this.comments);
       }
     }, (err) => {
-      this.comments = [];
+      delete this.comments;
       this.cs.showToast("Internal server error.. Try again later");
     });
   }
