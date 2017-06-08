@@ -56,4 +56,9 @@ a{
   text-align: left;
   vertical-align: middle;
 }
-
+/*adding border in homework and circular*/
+.container-border{
+  width: 100%;
+  border-style: solid;
+  border-color:#cacacc;
+}
