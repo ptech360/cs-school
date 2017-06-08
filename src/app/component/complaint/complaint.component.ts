@@ -25,11 +25,11 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
   public EmptyComplaints: boolean = false;
   public loader:boolean = false;
   public currentPage = 1;
-  public complaint = {
+  public complaint = {      
     title: ""
-  }
+  } 
   public url: string = "";
-  public status: string = "";
+  public status: string = "";   
   constructor(public cs: ComplaintService,
     public router: Router,
     public route: ActivatedRoute, ) {
@@ -57,8 +57,8 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
       comment: new FormControl("")
     });
     this.closeForm = new FormGroup({
-      rca: new FormControl(""),
-      comment: new FormControl("")
+      rca: new FormControl("", [Validators.required]),
+      comment: new FormControl("", [Validators.required])
     })
   }
 

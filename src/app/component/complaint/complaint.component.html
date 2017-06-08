@@ -132,7 +132,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="Submit" class="btn btn-default">Submit</button>
+          <button type="Submit" [disabled]= "closeForm.invalid" class="btn btn-default">Submit</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </form>
@@ -185,7 +185,7 @@
     </div>
     <div class="clearFix"></div>
   </div>
-  <div *ngIf="closedOn" class="panel-footer">
+  <div  class="panel-footer">
     <form [formGroup]="commentForm" (submit)="submitComment()">
       <textarea name="comment" formControlName="comment" cols="0" rows="0"></textarea>
       <span class="send-button">
