@@ -15,9 +15,11 @@
 	border-style: solid;
 	border-color: blue;
 }
-
-/*.homework-container{
+h3{
+    font-family:Inconsolata;
+}
+.container-border{
   width: 100%;
   border-style: solid;
   border-color:#cacacc;
-}*/
+}
