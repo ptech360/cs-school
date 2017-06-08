@@ -1,11 +1,11 @@
-<h3>Complaint</h3>
+<h3>Complaint Component</h3>
 <div class="panel panel-default">
   <!-- Default panel contents -->
-  <div class="panel-heading">All Complaints</div>
+  <div class="panel-heading">{{status}} Complaints</div>
 
   <!-- Table -->
   <div class="panel-body">
-    <table class="table table-hover">
+    <table class="table table-hover" *ngIf="complaints">
       <thead>
         <tr>
           <th>Id</th>
@@ -19,25 +19,41 @@
         </tr>
       </thead>
       <tbody *ngFor="let c of complaints; let i = index;" class="container-border">
-        <tr data-toggle="collapse" [attr.data-target]="'#' + c.id">
-          <td class="action"><span class="cid"><a>{{c.id}}</a></span></td>
+        <tr>
+          <td class="action" data-toggle="collapse" [attr.data-target]="'#' + c.id" data-parent="#accordion"><span class="cid"><a>{{c.id}}</a></span></td>
           <td>{{c.title}}</td>
           <td>{{c.studentName}} - {{c.studentStandardName}}</td>
           <td *ngIf="!complaintStatus"><span [style.background]="c.statusColor" class="badge">{{c.statusName}}</span></td>
           <td>{{c.priorityName}}</td>
-          <td *ngIf="!(complaintStatus == 4 || complaintStatus == 5)"><a (click)="selectComplaint(c)" data-toggle="modal" data-target="#myModal" class="action"><i class="glyphicon glyphicon-pencil"></i></a></td>
-          <!--<td class="center-align"><a href="#chat" (click)="getComplaintCommentById(c.id)" class="action"><i class="material-icons">chat_bubble</i></a></td>-->
+          <td *ngIf="!(complaintStatus == 4 || complaintStatus == 5)"><a [ngClass]="{'disabled-click' : c.statusId == 4}" (click)="selectComplaint(c,in)" data-toggle="modal" data-target="#myModal"
+              class="action"><i class="glyphicon glyphicon-pencil"></i></a></td>
           <td class="center-align"><a onclick="$('.panel.panel-chat').show();" (click)="getComplaintCommentById(c.id)" class="action"><i class="glyphicon glyphicon-comment"></i></a></td>
         </tr>
         <tr [attr.id]="c.id" class="collapse">
-          <td colspan="8" style="border:none;">
+          <td colspan="6" style="border:none;">
             <b>Description : </b>{{c.description}}
+            <p *ngIf="c.closedOn">
+              <b>Closed On : </b> {{c.closedOn | date: "shortDate"}} <br/>
+              <b>Root Cause : </b> {{c.rca}}
+            </p>
+            <p *ngIf="c.againstCategoryName">
+              <b>Complaint Against : </b> {{c.againstCategoryName}}
+            </p>
+            <p *ngIf="c.againstEmployeeName">
+              <b>Complaint Against : </b> {{c.againstEmployeeName}}
+            </p>
+          </td>
+          <td style="border:none;">
+            <button type="button" *ngIf="c.statusId != 4" (click)="selectedComplaint = c; selectedIndex = in;" data-toggle="modal" data-target="#myModal3">Close</button>
           </td>
         </tr>
       </tbody>
     </table>
+    <div class="row text-center">
+      <loader [condition]="!complaints"></loader>
+    </div>
   </div>
-  <div class="panel-footer">
+  <!--<div class="panel-footer">
     <nav aria-label="Page navigation example">
       <ul class="pagination">
         <li class="page-item" [ngClass]="{'disabled': currentPage === 1}"><a class="page-link" (click)="previousComplaint()">Previous</a></li>
@@ -47,9 +63,9 @@
         <li class="page-item" [ngClass]="{'disabled': EmptyComplaints}"><a class="page-link" (click)="nextComplaint()">Next</a></li>
       </ul>
     </nav>
-    <!--<button (click)="previousComplaint()" class="btn nav-btn right" [disabled]="currentPage === 1">Previous</button>
-    <button (click)="nextComplaint()" class="btn right nav-btn" [disabled]="EmptyComplaints">Next</button>    -->
-  </div>
+    <button (click)="previousComplaint()" class="btn nav-btn right" [disabled]="currentPage === 1">Previous</button>
+    <button (click)="nextComplaint()" class="btn right nav-btn" [disabled]="EmptyComplaints">Next</button>    
+  </div>-->
 </div>
 
 <!-- Edit Modal -->
@@ -63,18 +79,16 @@
         </button>
       </div>
       <form name="form1" [formGroup]="editForm" (submit)="updateComplaint()">
-      <div class="modal-body">
-        
+        <div class="modal-body">
           <div class="form-group">
             <label for="sel1">Assigned To:</label>
-            <select class="form-control" formControlName="assignedTo" >
+            <select class="form-control" formControlName="assignedTo">
               <option *ngFor="let emp of employees" [value]="emp.id">{{emp.name}}</option>
             </select>
           </div>
-          
           <div class="form-group">
             <p><b>Priority:</b></p>
-            <div class="radio" *ngFor="let prio of priorities;">            
+            <div class="radio" *ngFor="let prio of priorities;">
               <label><input type="radio" name="priorityId" [value]="prio.id" formControlName="priorityId">{{prio.name}}</label>
             </div>
           </div>
@@ -83,40 +97,52 @@
             <div class="checkbox">
               <label><input type="checkbox" name="progress" formControlName="statusId">In Progress</label>
             </div>
-          </div>        
-      </div>
-      <div class="modal-footer">
-        <button type="reset" class="btn btn-success pull-right" (click)="resetComplaints()">Reset</button>
-        <button type="submit" class="btn btn-success pull-right">Submit</button>
-      </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-right" (click)="resetComplaints()">Reset</button>
+          <button type="submit" class="btn btn-default pull-right">Submit</button>
+        </div>
       </form>
     </div>
   </div>
 </div>
 
 <!--End of Edit-->
-<!--Modal-->
-<div id="modal1" class="modal fade" role="dialog">
+
+<!-- Close Modal -->
+<div class="modal fade" id="myModal3" role="dialog">
   <div class="modal-dialog">
 
-    <!-- Modal content-->
+    <!-- Close Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">{{complaint.title}}</h4>
+        <h4 class="modal-title">Close Complaint </h4>
       </div>
-      <div class="modal-body">
-        {{complaint}}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-      </div>
+      <form [formGroup]="closeForm" (submit)="closeComplaint()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="rootCause">Root Cause</label>
+            <textarea class="form-control" formControlName="rca" id="rootCause" rows="3" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="exampleTextarea">Comment</label>
+            <textarea class="form-control" formControlName="comment" id="commentClose" rows="3" required></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="Submit" class="btn btn-default">Submit</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </form>
     </div>
-
   </div>
 </div>
 
-<!--<!- chat -->
+
+
+<!-- chat -->
 <div id="chat" class="panel panel-chat">
   <div class="panel-heading">
     <a href="#" class="chatMinimize" onclick="return false"><span>{{complaintTitleOfCommentModel | uppercase}}</span></a>
@@ -124,13 +150,16 @@
     <div class="clearFix"></div>
   </div>
   <div class="panel-body">
+    <div class="row text-center">
+      <loader [condition]="!comments"></loader>
+    </div>
     <div *ngFor="let c of comments">
       <div *ngIf="c.employeeId == currentUser">
         <div class="myMsg">
           <img src="http://www.clker.com/cliparts/f/8/a/6/1376432218623075512little%20girl%20dreaming-hi.png" class="myImg" />
           <div class="myText">
             <span class="myText-style">
-                    {{c.comment}}
+              {{c.comment}}
             </span>
           </div>
         </div>
@@ -143,8 +172,8 @@
           <img src="http://www.kpop-map.com/wp-content/uploads/2016/01/sm-rookies-kun-profile.jpg" class="img" />
           <div class="text">
             <span class="text-style">
-                  {{c.comment}}
-                </span>
+              {{c.comment}}
+            </span>
           </div>
         </div>
         <div class="msgDate">
@@ -156,10 +185,10 @@
     </div>
     <div class="clearFix"></div>
   </div>
-  <div class="panel-footer">
-    <form [formGroup] = "commentForm" (submit)="submitComment()">
-    <textarea name="comment" formControlName ="comment" cols="0" rows="0"></textarea>
-    <span class="send-button">
+  <div *ngIf="closedOn" class="panel-footer">
+    <form [formGroup]="commentForm" (submit)="submitComment()">
+      <textarea name="comment" formControlName="comment" cols="0" rows="0"></textarea>
+      <span class="send-button">
         <button type="submit" class="btn btn-success btn-circle btn-lg"><i class="glyphicon glyphicon-share-alt"></i></button>
     </span>
     </form>
