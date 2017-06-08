@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HomeworkService } from '../../../providers/homework.service';
 // import { CustomService } from '../../../providers/custom.service';
@@ -11,7 +11,7 @@ declare let $;
   templateUrl: 'add.html',
 })
 
-export class HomeworkAddComponent implements OnInit {
+export class HomeworkAddComponent implements OnInit, AfterViewInit {
 
   public title: string = "New Homework";
   public homework: FormGroup;
@@ -21,6 +21,11 @@ export class HomeworkAddComponent implements OnInit {
 
   constructor(private homeworkService: HomeworkService,
               private commonService: CommonService) { }
+
+  ngAfterViewInit(){
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementsByName("dueDate")[0].setAttribute('min', today);
+  }
 
   ngOnInit() {
     this.initForm();

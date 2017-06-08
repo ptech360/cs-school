@@ -33,12 +33,12 @@
         </tbody>
       </table>
       <div class="row text-center">
-        <loader [condition]="!homeworks"></loader>
+        <loader [condition]="loader"></loader>
       </div>
     </div>
     
-    <!--<div class="panel-footer" *ngIf="!EmptyHomeworks">
-      <nav aria-label="Page navigation example">
+    <div class="panel-footer">
+      <!--<nav aria-label="Page navigation example">
         <ul class="pagination">
           <li class="page-item" [ngClass]="{'disabled': currentPage === 1}"><a class="page-link" (click)="previousHomework()" >Previous</a></li>
           <li class="page-item"><a class="page-link active" >1</a></li>
@@ -46,7 +46,9 @@
           <li class="page-item"><a class="page-link" href="#">3</a></li>
           <li class="page-item" [ngClass]="{'disabled': EmptyHomeworks}"><a class="page-link" (click)="nextHomework()" >Next</a></li>
         </ul>
-      </nav>
-    </div>-->
+      </nav>-->
+      <button (click)="previousHomework()" class="btn nav-btn right" [disabled]="currentPage === 1">Previous</button>
+      <button (click)="nextHomework()" class="btn right nav-btn" [disabled]="EmptyHomeworks || noMore">Next</button>
+    </div>
   </div>
 </div>
