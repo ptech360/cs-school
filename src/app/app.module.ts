@@ -24,6 +24,8 @@ import { PollComponent } from './component/poll/poll.component';
 import { SuggestionComponent } from './component/suggestion/suggestion.component';
 import { SurveyComponent } from './component/survey/survey.component';
 import { GoogleChart } from './customComponent/chart.directive';
+import { CustomLoader } from './customComponent/loader.component';
+import { Scrollable } from './customComponent/scrollable.directive';
 import { SuggestionForMe } from './component/suggestion/suggestion.forme';
 import { SuggestionByMe } from './component/suggestion/suggestion.byme';
 
@@ -58,6 +60,8 @@ import {XHRBackend, RequestOptions} from '@angular/http';
     SuggestionComponent,
     SurveyComponent,
     GoogleChart,
+    CustomLoader,
+    Scrollable,
     SuggestionForMe,
     SuggestionByMe
   ],

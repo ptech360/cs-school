@@ -212,3 +212,8 @@ htlm, body
     margin-top:25%;
     margin-right: 2px;
 }
+
+.disabled-click {
+    pointer-events: none;
+    color:#e1e1e1;
+}
