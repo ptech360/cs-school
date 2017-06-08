@@ -214,7 +214,7 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
   public closedOn:boolean = false;
   currentUser = this.cs.getUserId();
   getComplaintCommentById(complaint) {
-    if(complaint.colsedOn) this.closedOn = true;
+    if(complaint.closedOn) this.closedOn = true;
     this.complaintIdOfCommentModel = complaint.id;
     this.complaints.forEach(element => {
       if (element['id'] == complaint.id)
