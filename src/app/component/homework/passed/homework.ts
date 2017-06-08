@@ -4,8 +4,8 @@ import { HomeworkService } from '../../../providers/homework.service';
 
 @Component({
   selector: 'passed-homework',
-  templateUrl: 'homework.html',
   styleUrls:['../homework.component.css'],
+  templateUrl: '../current/homework.html'
 })
 
 export class PassedHomework implements OnInit {
@@ -13,7 +13,7 @@ export class PassedHomework implements OnInit {
   public title: string = 'Homework';
   public icon: string = "book";
   public EmptyHomeworks = false;
-  homeworks = [];
+  public homeworks;
   currentPage = 1;
   monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 
@@ -22,7 +22,7 @@ export class PassedHomework implements OnInit {
               ) {
   }
 
-  ngOnInit() {
+  ngOnInit() : void {
     this.getHomeworks();
   }
 

@@ -11,7 +11,7 @@ export class CircularComponent implements OnInit {
   public icon = "ios-paper-outline";
   public allCirculars;
   private currentPage = 1;
-  private circulars = [];
+  public circulars;
   private EmptyCirculars: boolean = false;
 
   constructor(private circularService: CircularService) {

@@ -212,12 +212,8 @@ htlm, body
     margin-top:25%;
     margin-right: 2px;
 }
-h3{
-    font-family:Inconsolata;
-}
 
-.container-border{
-  width: 100%;
-  border-style: solid;
-  border-color:#cacacc;
+.disabled-click {
+    pointer-events: none;
+    color:#e1e1e1;
 }

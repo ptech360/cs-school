@@ -29,7 +29,7 @@ export class ComplaintService {
   }
 
   getComplaintCommentById(url, complaintId) {
-    return this.http.get(this.baseUrl + url + "/" +complaintId + "/comment")
+    return this.http.get(this.baseUrl + url + "/" + complaintId + "/comment")
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -43,6 +43,12 @@ export class ComplaintService {
 
   updateComplaint(complaintId, complaint) {
     return this.http.put(this.baseUrl + "/complaint/" + complaintId, complaint)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  closeComplaint(complaintId, complaint) {
+    return this.http.put(this.baseUrl + "/complaint/" + complaintId + "/close", complaint)
       .map(this.extractData)
       .catch(this.handleError);
   }

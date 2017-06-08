@@ -12,7 +12,7 @@ declare let $;
 export class ComplaintComponent implements OnInit, AfterViewInit {
 
   public editForm: FormGroup;
-
+  public closeForm: FormGroup;
   public complaints;
   public employees = [];
   public priorities = [];
@@ -23,6 +23,7 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
   public complaintCategory;
   public complaintsCOPY;
   public EmptyComplaints: boolean = false;
+  public loader:boolean = false;
   public currentPage = 1;
   public complaint = {
     title: ""
@@ -44,17 +45,21 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
       case '4': this.status = "Closed"; break;
       case '5': this.status = "Reopen"; break;
       case '6': this.status = "Satisfied"; break;
-      default: this.status = "All"; break;
+      default : this.status = "All"; break;
     }
   }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.fetchComplaints();
     this.getEditInfo();
     this.loadForm();
     this.commentForm = new FormGroup({
       comment: new FormControl("")
-    }); 
+    });
+    this.closeForm = new FormGroup({
+      rca: new FormControl(""),
+      comment: new FormControl("")
+    })
   }
 
   public getEditInfo() {
@@ -100,30 +105,40 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
   }
 
   public fetchComplaints() {
+    this.loader = true;
     this.cs.getComplaint(this.url, this.currentPage).subscribe((res) => {
-      if (res.status !== 204) {
-        console.log(res);
+      this.onSuccess(res);
+    }, (err) => {
+      this.onError(err);
+    });
+  }
+
+  public onSuccess(res) {
+    this.loader = false;
+    if (res.status !== 204) {
         this.complaints = res;
         this.complaintsCOPY = res;
         this.EmptyComplaints = false;
       } else {
         this.EmptyComplaints = true;
       }
-    }, (err) => {
-      this.complaints = [];
-    });
+  }
+
+  public onError(err) {
+    this.complaints = [];
   }
 
   public selectedComplaint;
-  public selectComplaint(complaint) {
+  public selectedIndex;
+  public selectComplaint(complaint, index) {
     this.selectedComplaint = complaint;
-    console.log("edit", complaint);
+    this.selectedIndex = index;
     this.loadFormValue();
   }
 
-  public updateComplaint(){
+  public updateComplaint() {
     console.log(this.editForm.value);
-    if(this.editForm.value['statusId'])
+    if (this.editForm.value['statusId'])
       this.editForm.value['statusId'] = 3;
     else
       delete this.editForm.value['statusId'];
@@ -131,10 +146,10 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
     //   delete this.editForm.value['assignedTo'];
     // if(this.editForm.value['priorityId'] == this.selectedComplaint.priorityId)
     //   delete this.editForm.value['priorityId'];
-    this.cs.updateComplaint(this.selectedComplaint.id, this.editForm.value).subscribe(response =>{
-      console.log("success", response);
+    this.cs.updateComplaint(this.selectedComplaint.id, this.editForm.value).subscribe(response => {
+      this.complaints[this.selectedIndex] = response; 
       $('#myModal').modal('hide');
-    },error =>{
+    }, error => {
       console.log("error", error);
     })
   }
@@ -147,10 +162,21 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
     })
   }
 
-  public loadFormValue(){
-    this.editForm.patchValue({"assignedTo": this.selectedComplaint.assignedEmployeeId});
-    this.editForm.patchValue({"priorityId": this.selectedComplaint.priorityId});
+  public loadFormValue() {
+    this.editForm.patchValue({ "assignedTo": this.selectedComplaint.assignedEmployeeId });
+    this.editForm.patchValue({ "priorityId": this.selectedComplaint.priorityId });
   }
+
+  public closeComplaint() {
+    this.cs.closeComplaint(this.selectedComplaint.id, this.closeForm.value).subscribe(response => {
+      this.complaints[this.selectedIndex] = response; 
+      $('#myModal3').modal('hide');
+    }, error => {
+      console.log("error", error);
+    });
+  }
+
+
 
   public previousComplaint() {
     delete this.complaints;
@@ -169,7 +195,7 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
   }
 
   public resetComplaints() {
-   this.loadFormValue();
+    this.loadFormValue();
   }
 
   public searchComplaints(ev: any) {
@@ -201,11 +227,11 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
         console.log("comments", this.comments);
       }
     }, (err) => {
-      this.comments = [];
+      delete this.comments;
       this.cs.showToast("Internal server error.. Try again later");
     });
   }
-  
+
   public submitComment() {
     if (this.commentForm.value['comment'])
       this.cs.postComplaintComment(this.complaintIdOfCommentModel, this.commentForm.value).subscribe((res) => {
