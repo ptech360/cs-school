@@ -57,6 +57,13 @@ a{
   vertical-align: middle;
 }
 
+/*adding border in homework and circular*/
+.container-border{
+  width: 100%;
+  border-style: solid;
+  border-color:#cacacc;
+}
+
 .modal-header{
     background:#ea212e;
     color:white;
