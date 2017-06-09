@@ -15,7 +15,8 @@ export class CurrentHomework implements OnInit {
   public title: string = "Homework";
   public icon: string = "book";
   public currentPage = 1;
-  public homeworks;
+  public homeworks = [];
+  loader:boolean = false;
   public EmptyHomeworks: boolean = false;
   monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 
@@ -27,6 +28,7 @@ export class CurrentHomework implements OnInit {
 
   public getHomeworks() {
     // this.nl.showLoader();
+    this.loader = true;
     this.homeworkService.getHomework(this.currentPage).subscribe((data) => {
       console.log(data);
       this.onSuccess(data);
@@ -35,13 +37,16 @@ export class CurrentHomework implements OnInit {
     });
   }
 
+  public noMore:boolean = false;
   public onSuccess(res) {
     // this.nl.hideLoader();
+    this.loader = false;
     if (res.status === 204) {
       this.EmptyHomeworks = true;
     } else {
       this.EmptyHomeworks = false;
       this.homeworks = res;
+      if(this.homeworks.length < 10) this.noMore = true;
       this.homeworks.forEach((data) => {
         data.dueMonth = this.monthNames[(new Date(data.dueDate)).getMonth()];
         data.dueDate = ("0" + (new Date(data.dueDate).getDate())).slice(-2);

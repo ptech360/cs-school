@@ -13,7 +13,7 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
 
   public editForm: FormGroup;
   public closeForm: FormGroup;
-  public complaints;
+  public complaints = [];
   public employees = [];
   public priorities = [];
   public comments;
@@ -25,11 +25,11 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
   public EmptyComplaints: boolean = false;
   public loader:boolean = false;
   public currentPage = 1;
-  public complaint = {
+  public complaint = {      
     title: ""
-  }
+  } 
   public url: string = "";
-  public status: string = "";
+  public status: string = "";   
   constructor(public cs: ComplaintService,
     public router: Router,
     public route: ActivatedRoute, ) {
@@ -57,8 +57,8 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
       comment: new FormControl("")
     });
     this.closeForm = new FormGroup({
-      rca: new FormControl(""),
-      comment: new FormControl("")
+      rca: new FormControl("", [Validators.required]),
+      comment: new FormControl("", [Validators.required])
     })
   }
 
@@ -112,11 +112,12 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
       this.onError(err);
     });
   }
-
+  public noMore:boolean = false;
   public onSuccess(res) {
     this.loader = false;
     if (res.status !== 204) {
         this.complaints = res;
+        if(this.complaints.length < 10) this.noMore = true;
         this.complaintsCOPY = res;
         this.EmptyComplaints = false;
       } else {
@@ -210,15 +211,17 @@ export class ComplaintComponent implements OnInit, AfterViewInit {
 
   public complaintIdOfCommentModel;
   public complaintTitleOfCommentModel;
+  public closedOn:boolean = false;
   currentUser = this.cs.getUserId();
-  getComplaintCommentById(complaintId) {
-    this.complaintIdOfCommentModel = complaintId;
+  getComplaintCommentById(complaint) {
+    if(complaint.closedOn) this.closedOn = true;
+    this.complaintIdOfCommentModel = complaint.id;
     this.complaints.forEach(element => {
-      if (element['id'] == complaintId)
+      if (element['id'] == complaint.id)
         this.complaintTitleOfCommentModel = element.title;
     });
 
-    this.cs.getComplaintCommentById(this.url, complaintId).subscribe((res) => {
+    this.cs.getComplaintCommentById(this.url, complaint.id).subscribe((res) => {
       if (res.status === 204) {
         this.EmptyComments = true;
       } else {

@@ -13,8 +13,9 @@ export class PassedHomework implements OnInit {
   public title: string = 'Homework';
   public icon: string = "book";
   public EmptyHomeworks = false;
-  public homeworks;
+  public homeworks = [];
   currentPage = 1;
+  loader:boolean = false;
   monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 
   constructor(private homeworkService: HomeworkService,
@@ -28,6 +29,7 @@ export class PassedHomework implements OnInit {
 
   public getHomeworks() {
     // this.nl.showLoader();
+    this.loader = true;
     this.homeworkService.getOldHomework(this.currentPage).subscribe((data) => {
       this.onSuccess(data);
     }, (err) => {
@@ -58,14 +60,16 @@ export class PassedHomework implements OnInit {
       });
     }, 500);
   }
-
+  noMore:boolean = false;
   public onSuccess(res) {
     // this.nl.hideLoader();
+    this.loader = false;
     if (res.status === 204) {
       this.EmptyHomeworks = true;
     } else {
       this.EmptyHomeworks = false;
       this.homeworks = res;
+      if(this.homeworks.length < 10) this.noMore = true;
       this.homeworks.forEach((data) => {
         data.dueMonth = this.monthNames[(new Date(data.dueDate)).getMonth()];
         data.dueDate = ("0" + (new Date(data.dueDate).getDate())).slice(-2);

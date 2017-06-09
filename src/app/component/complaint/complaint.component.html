@@ -27,7 +27,7 @@
           <td>{{c.priorityName}}</td>
           <td *ngIf="!(complaintStatus == 4 || complaintStatus == 5)"><a [ngClass]="{'disabled-click' : c.statusId == 4}" (click)="selectComplaint(c,in)" data-toggle="modal" data-target="#myModal"
               class="action"><i class="glyphicon glyphicon-pencil"></i></a></td>
-          <td class="center-align"><a onclick="$('.panel.panel-chat').show();" (click)="getComplaintCommentById(c.id)" class="action"><i class="glyphicon glyphicon-comment"></i></a></td>
+          <td class="center-align"><a onclick="$('.panel.panel-chat').show();" (click)="getComplaintCommentById(c)" class="action"><i class="glyphicon glyphicon-comment"></i></a></td>
         </tr>
         <tr [attr.id]="c.id" class="collapse">
           <td colspan="6" style="border:none;">
@@ -50,11 +50,11 @@
       </tbody>
     </table>
     <div class="row text-center">
-      <loader [condition]="!complaints"></loader>
+      <loader [condition]="loader"></loader>
     </div>
   </div>
-  <!--<div class="panel-footer">
-    <nav aria-label="Page navigation example">
+  <div class="panel-footer">
+    <!--<nav aria-label="Page navigation example">
       <ul class="pagination">
         <li class="page-item" [ngClass]="{'disabled': currentPage === 1}"><a class="page-link" (click)="previousComplaint()">Previous</a></li>
         <li class="page-item"><a class="page-link active">1</a></li>
@@ -62,10 +62,10 @@
         <li class="page-item"><a class="page-link" href="#">3</a></li>
         <li class="page-item" [ngClass]="{'disabled': EmptyComplaints}"><a class="page-link" (click)="nextComplaint()">Next</a></li>
       </ul>
-    </nav>
+    </nav>-->
     <button (click)="previousComplaint()" class="btn nav-btn right" [disabled]="currentPage === 1">Previous</button>
-    <button (click)="nextComplaint()" class="btn right nav-btn" [disabled]="EmptyComplaints">Next</button>    
-  </div>-->
+    <button (click)="nextComplaint()" class="btn right nav-btn" [disabled]="EmptyComplaints || noMore">Next</button>    
+  </div>
 </div>
 
 <!-- Edit Modal -->
@@ -132,7 +132,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="Submit" class="btn btn-default">Submit</button>
+          <button type="Submit" [disabled]= "closeForm.invalid" class="btn btn-default">Submit</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </form>
@@ -185,7 +185,7 @@
     </div>
     <div class="clearFix"></div>
   </div>
-  <div *ngIf="closedOn" class="panel-footer">
+  <div class="panel-footer" *ngIf="closedOn">
     <form [formGroup]="commentForm" (submit)="submitComment()">
       <textarea name="comment" formControlName="comment" cols="0" rows="0"></textarea>
       <span class="send-button">
