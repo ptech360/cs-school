@@ -214,3 +214,12 @@ htlm, body
     margin-right: 2px;
     border: 2px solid #4c4c4c;;
 }
+h3{
+    font-family:Inconsolata;
+}
+
+.container-border{
+  width: 100%;
+  border-style: solid;
+  border-color:#cacacc;
+}
