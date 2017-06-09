@@ -1,4 +1,4 @@
-<h3>Complaint Component</h3>
+<h3>Complaint</h3>
 <div class="panel panel-default">
   <!-- Default panel contents -->
   <div class="panel-heading">{{status}} Complaints</div>
@@ -18,7 +18,11 @@
           <th></th>
         </tr>
       </thead>
+<<<<<<< HEAD
       <tbody *ngFor="let c of complaints; let i = index;" class="container-border">
+=======
+      <tbody *ngFor="let c of complaints; let i = index;">
+>>>>>>> 7438b11cdbcc304ec4332466a27b34adadc17b95
         <tr>
           <td class="action" data-toggle="collapse" [attr.data-target]="'#' + c.id" data-parent="#accordion"><span class="cid"><a>{{c.id}}</a></span></td>
           <td>{{c.title}}</td>
