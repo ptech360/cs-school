@@ -47,8 +47,8 @@
           <li class="page-item" [ngClass]="{'disabled': EmptyHomeworks}"><a class="page-link" (click)="nextHomework()" >Next</a></li>
         </ul>
       </nav>-->
-      <button (click)="previousHomework()" class="btn nav-btn right" [disabled]="currentPage === 1">Previous</button>
-      <button (click)="nextHomework()" class="btn right nav-btn" [disabled]="EmptyHomeworks || noMore">Next</button>
+      <button type="button" (click)="previousHomework()" [disabled]="currentPage === 1" class="btn btn-danger">Previous</button>
+      <button type="button" (click)="nextHomework()" [disabled]="EmptyHomeworks || noMore" class="btn btn-danger">Next</button>
     </div>
   </div>
 </div>
