@@ -78,11 +78,7 @@ export class AddCircular implements OnInit, AfterViewInit{
   }
 
   public onCircularType(event: any) {
-    if (event == "1") {
-      this.circular.removeControl("standardIds");
-    } else if (event == "2") {
-      this.circular.addControl("standardIds", new FormControl('', [Validators.required]));
-    }
+    this.circular.controls['standardIds'].reset();
   }
 
   public circularSubmit(){

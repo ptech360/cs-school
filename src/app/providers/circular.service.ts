@@ -42,7 +42,7 @@ export class CircularService {
   }
 
   public getStandards() {
-    return this.http.get(this.serverUrl + '/circular/standard')
+    return this.http.get(this.serverUrl + '/homework/standard')
                     .map(this.extractData)
                     .catch(this.handleError);
   }

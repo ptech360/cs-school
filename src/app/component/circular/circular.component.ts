@@ -34,12 +34,12 @@ export class CircularComponent implements OnInit {
   public noMore:boolean;
   private onSuccess(data) {
     this.loader = false;
-    if (data.status === 204) {
-      if(this.circulars.length < 10) this.noMore = true;
-      else this.noMore = false;
+    if (data.status === 204) {      
       this.EmptyCirculars = true;
     } else {
       this.circulars = data;
+      if(this.circulars.length < 10) this.noMore = true;
+      else this.noMore = false;
       this.EmptyCirculars = false;
     }
   }
