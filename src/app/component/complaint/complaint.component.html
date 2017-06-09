@@ -13,7 +13,7 @@
           <th>StudentName</th>
           <th *ngIf="!complaintStatus">Status</th>
           <th>Priority</th>
-          <th *ngIf="!(complaintStatus == 4 || complaintStatus == 5)">Edit</th>
+          <th *ngIf="!(complaintStatus == 4 || complaintStatus == 6)">Edit</th>
           <th>Comment</th>
           <th></th>
         </tr>
@@ -185,7 +185,7 @@
     </div>
     <div class="clearFix"></div>
   </div>
-  <div class="panel-footer" *ngIf="closedOn">
+  <div class="panel-footer" *ngIf="!closedOn">
     <form [formGroup]="commentForm" (submit)="submitComment()">
       <textarea name="comment" formControlName="comment" cols="0" rows="0"></textarea>
       <span class="send-button">
