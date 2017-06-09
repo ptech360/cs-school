@@ -1,18 +1,10 @@
-.btn-custom{
-  padding: 7px 10px;
-  font-size: 18px;
-  font-family: 'Anonymous Pro';
-  transition: all 0.3s ease-in-out;
-  float: right; 
-  cursor: pointer;
-  background-color: #ea212e;  
-  color: white;
-  border-radius: 5px;
-   box-shadow: 5px 5px 5px #888888; 
+.form-group{
+    border-style: none;
+    background-color: inherit;
 }
 
-.btn-custom:hover{
-  width:130px;
-  opacity: 0.8;
- 
-  }
+h1{
+    font-family: 'Inconsolata';
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
