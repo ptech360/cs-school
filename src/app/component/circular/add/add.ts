@@ -16,12 +16,19 @@ export class AddCircular implements OnInit, AfterViewInit{
   public newCircular;
   public standards = [];
   public circularType = [];
-
+  public submitProgress:boolean = false;
   constructor(private circserv: CircularService,
               private commonService: CommonService) { }
 
   ngOnInit() {
-    this.initForm();
+    this.circular = this.initForm();
+  }
+
+  onDueDate(e){
+    if(new Date(e.target.value) < new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate())){
+      alert("Invalid Date");
+      this.circular.controls['date'].patchValue(this.commonService.getTomorrow());
+    }
   }
 
   ngAfterViewInit() {
@@ -30,7 +37,7 @@ export class AddCircular implements OnInit, AfterViewInit{
   }
 
   public initForm() {
-    this.circular = new FormGroup({
+  return new FormGroup({
       title: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       date: new FormControl(this.commonService.getTomorrow(), [Validators.required]),
@@ -78,16 +85,24 @@ export class AddCircular implements OnInit, AfterViewInit{
   }
 
   public onCircularType(event: any) {
-    this.circular.controls['standardIds'].reset();
+    if (event == "1") {
+      this.circular.removeControl("standardIds");
+    } else if (event == "2") {
+      this.circular.addControl("standardIds", new FormControl('', [Validators.required]));
+    }
+    // this.circular.controls['standardIds'].reset();
   }
 
   public circularSubmit(){
     console.log(this.circular.value);
+    this.submitProgress = true;
     this.onSubmit();
   }
 
   public onSubmit() {
     this.circserv.PostCircular(this.circular.value).subscribe((res) => {
+      this.submitProgress = false;
+      this.circular = this.initForm();
       $('#circularModal').modal('show');
       console.log("Circular created successfully");
     }, (err) => {
