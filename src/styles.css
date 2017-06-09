@@ -60,12 +60,23 @@ a{
   text-align: left;
   vertical-align: middle;
 }
+<<<<<<< HEAD
 /*adding border in homework and circular*/
 /*.container-border{
   width: 100%;
   border-style: solid;
   border-color:#cacacc;
 }*/
+=======
+
+/*adding border in homework and circular*/
+.container-border{
+  width: 100%;
+  border-style: solid;
+  border-color:#cacacc;
+}
+
+>>>>>>> aaf60cbfce1fe4efc9a86bb1df5129e53127c0c4
 .modal-header{
     background:#ea212e;
     color:white;
@@ -74,4 +85,16 @@ a{
 .modal-footer{
      background: #e1e1e1;
      box-shadow: 0 0 10px black;
+<<<<<<< HEAD
+=======
+}
+.btn-circle{
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.42;
+  border-radius: 15px;
+>>>>>>> aaf60cbfce1fe4efc9a86bb1df5129e53127c0c4
 }
