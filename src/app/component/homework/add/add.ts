@@ -9,6 +9,7 @@ declare let $;
 @Component({
   selector: 'homework-add',
   templateUrl: 'add.html',
+  styleUrls:['../homework.component.css']
   
 })
 
