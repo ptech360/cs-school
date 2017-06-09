@@ -217,3 +217,9 @@ htlm, body
     pointer-events: none;
     color:#e1e1e1;
 }
+
+h1{
+    font-family: 'Inconsolata';
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
