@@ -13,7 +13,7 @@
             <th>Due Date</th>            
           </tr>
         </thead>
-        <tbody *ngFor="let a of homeworks; let i = index;">
+        <tbody *ngFor="let a of homeworks; let i = index;" class="container-border">
           <tr data-toggle="collapse" [attr.data-target]="'#' + a.id" data-parent="#accordion">
             <td class="action">{{a.id}}</td>
             <td>{{a.subjectName}}</td>

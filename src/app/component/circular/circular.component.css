@@ -1,9 +1,18 @@
-.btn-circle{
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  padding: 6px 0;
-  font-size: 12px;
-  line-height: 1.42;
-  border-radius: 15px;
+.btn-custom{
+  padding: 7px 10px;
+  font-size: 18px;
+  font-family: 'Anonymous Pro';
+  transition: all 0.3s ease-in-out;
+  float: right; 
+  cursor: pointer;
+  background-color: #ea212e;  
+  color: white;
+  border-radius: 5px;
+   box-shadow: 5px 5px 5px #888888; 
 }
+
+.btn-custom:hover{
+  width:130px;
+  opacity: 0.8;
+ 
+  }

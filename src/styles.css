@@ -57,6 +57,13 @@ a{
   vertical-align: middle;
 }
 
+/*adding border in homework and circular*/
+.container-border{
+  width: 100%;
+  border-style: solid;
+  border-color:#cacacc;
+}
+
 .modal-header{
     background:#ea212e;
     color:white;
@@ -65,4 +72,13 @@ a{
 .modal-footer{
      background: #e1e1e1;
      box-shadow: 0 0 10px black;
+}
+.btn-circle{
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.42;
+  border-radius: 15px;
 }

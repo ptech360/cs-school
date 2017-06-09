@@ -244,3 +244,8 @@ a{
 a:hover{
     color: #ea212e;
 }
+
+h1,h2,h3,div,table,a{
+    font-family:'Anonymous Pro';
+    font-size: 15px !important;
+}

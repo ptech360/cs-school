@@ -9,6 +9,8 @@ declare let $;
 @Component({
   selector: 'homework-add',
   templateUrl: 'add.html',
+  styleUrls:['../homework.component.css']
+  
 })
 
 export class HomeworkAddComponent implements OnInit, AfterViewInit {

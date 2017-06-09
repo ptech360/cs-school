@@ -1,4 +1,4 @@
-<h3>Complaint Component</h3>
+<h3>Complaint</h3>
 <div class="panel panel-default">
   <!-- Default panel contents -->
   <div class="panel-heading">{{status}} Complaints</div>
@@ -19,12 +19,12 @@
           <th>StudentName</th>
           <th *ngIf="!complaintStatus">Status</th>
           <th>Priority</th>
-          <th *ngIf="!(complaintStatus == 4 || complaintStatus == 5)">Edit</th>
+          <th *ngIf="!(complaintStatus == 4 || complaintStatus == 6)">Edit</th>
           <th>Comment</th>
           <th></th>
         </tr>
       </thead>
-      <tbody *ngFor="let c of complaints; let in = index;">
+      <tbody *ngFor="let c of complaints; let i = index;" class="container-border">
         <tr>
           <td class="action" data-toggle="collapse" [attr.data-target]="'#' + c.id" data-parent="#accordion"><span class="cid"><a>{{c.id}}</a></span></td>
           <td>{{c.title}}</td>
@@ -191,7 +191,7 @@
     </div>
     <div class="clearFix"></div>
   </div>
-  <div class="panel-footer" *ngIf="closedOn">
+  <div class="panel-footer" *ngIf="!closedOn">
     <form [formGroup]="commentForm" (submit)="submitComment()">
       <textarea name="comment" formControlName="comment" cols="0" rows="0"></textarea>
       <span class="send-button">
