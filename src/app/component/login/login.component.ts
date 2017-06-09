@@ -14,7 +14,7 @@ export class LoginComponent{
               public appService: AuthService,
               public router: Router){
               if(appService.isLoggedIn()){                
-                router.navigate(['/home']);
+                router.navigate(['/dashboard']);
               }
   }
   ngOnInit() {
@@ -50,6 +50,6 @@ export class LoginComponent{
 
   public loggedInSuccesfully(res) {    
     this.appService.storeData(res);
-    this.router.navigate(['/home']);
+    this.router.navigate(['/dashboard']);
   }    
 }

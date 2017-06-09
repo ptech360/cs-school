@@ -5,6 +5,12 @@
 
   <!-- Table -->
   <div class="panel-body">
+    <div class="form-group row">
+      <label for="example-search-input" class="col-lg-2 col-form-label">Search</label>
+      <div class="col-lg-10">
+        <input class="form-control" type="search" placeholder="Search by complaint title .,. " id="example-search-input" (keyup)="searchComplaints($event)">
+      </div>
+    </div>
     <table class="table table-hover" *ngIf="complaints">
       <thead>
         <tr>
@@ -53,7 +59,7 @@
       <loader [condition]="loader"></loader>
     </div>
   </div>
-  <div class="panel-footer">
+  <div class="panel-footer" *ngIf="!noMore">
     <!--<nav aria-label="Page navigation example">
       <ul class="pagination">
         <li class="page-item" [ngClass]="{'disabled': currentPage === 1}"><a class="page-link" (click)="previousComplaint()">Previous</a></li>

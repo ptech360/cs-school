@@ -22,4 +22,8 @@ export class LoggedInGuard implements CanActivate {
     return this.canActivate();
   }
 
+  getData(key){
+    return localStorage.getItem(key);
+  }
+
 }

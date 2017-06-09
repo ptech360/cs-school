@@ -41,6 +41,12 @@ export class CircularService {
                     .catch(this.handleError);
   }
 
+  public getStandards() {
+    return this.http.get(this.serverUrl + '/circular/standard')
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
   private extractData(res: Response) {
 		if (res.status === 204) { return res; }
 		let body = res.json();

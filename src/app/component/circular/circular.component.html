@@ -34,7 +34,20 @@
       </tbody>
     </table>
     <div class="row text-center">
-      <loader [condition]="!circulars"></loader>
+      <loader [condition]="loader"></loader>
     </div>
+  </div>
+  <div class="panel-footer" *ngIf="noMore">
+    <!--<nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item" [ngClass]="{'disabled': currentPage === 1}"><a class="page-link" (click)="previousCircular()">Previous</a></li>
+        <li class="page-item"><a class="page-link active">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item" [ngClass]="{'disabled': EmptyCirculars}"><a class="page-link" (click)="nextCircular()">Next</a></li>
+      </ul>
+    </nav>-->
+    <button (click)="previousCircular()" class="btn nav-btn right" [disabled]="currentPage === 1">Previous</button>
+    <button (click)="nextCircular()" class="btn right nav-btn" [disabled]="EmptyCirculars || noMore">Next</button>    
   </div>
 </div>

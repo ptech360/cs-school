@@ -16,12 +16,12 @@
     </div>
     <div class="form-group">
       <label for="description">Description</label>
-      <textarea class="form-control" id="exampleTextarea" name="description" maxlength="250" formControlName="description" rows="3"></textarea>
-      <span>{{250 - homework.value.description.length}}</span>
+      <textarea class="form-control" id="exampleTextarea" name="description" maxlength="2500" formControlName="description" rows="3"></textarea>
+      <span>{{2500 - homework.value.description.length}}</span>
     </div>
     <div class="form-group">
       <label for="dueDate">Due Date</label>
-      <input class="form-control" type="date" max="2019-10-31" displayFormat="DD MMM YYYY" name="dueDate" formControlName="dueDate" id="dueDate">
+      <input class="form-control" type="date" format="dd/mm/yyyy" name="dueDate" formControlName="dueDate" id="dueDate">
     </div>
     <div class="form-group">
       <label for="exampleInputFile">Attachment</label>

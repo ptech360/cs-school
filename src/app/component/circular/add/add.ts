@@ -47,7 +47,7 @@ export class AddCircular implements OnInit, AfterViewInit{
   }
 
   public _getStandards() {
-    this.commonService.getStandards().subscribe((res) => {
+    this.circserv.getStandards().subscribe((res) => {
       this.standards = res;
       this.commonService.storeData("standards", res);
     }, (err) => {
