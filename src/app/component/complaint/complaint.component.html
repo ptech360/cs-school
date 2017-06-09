@@ -18,11 +18,7 @@
           <th></th>
         </tr>
       </thead>
-<<<<<<< HEAD
-      <tbody *ngFor="let c of complaints; let in = index;">
-=======
       <tbody *ngFor="let c of complaints; let i = index;" class="container-border">
->>>>>>> 4f738a7b7021f4ee691a7ed3b8916e045ce17f8a
         <tr>
           <td class="action" data-toggle="collapse" [attr.data-target]="'#' + c.id" data-parent="#accordion"><span class="cid"><a>{{c.id}}</a></span></td>
           <td>{{c.title}}</td>
