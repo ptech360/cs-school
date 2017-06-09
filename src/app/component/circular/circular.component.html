@@ -1,7 +1,8 @@
-<h3>Circulars
+<h3 >Circulars
 <button type="button" class="btn btn-success btn-circle" [routerLink]="['/add-circular']">
   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 </button>
+<button type="button" class="btn-custom" [routerLink]="['/add-circular']">Create New</button>
 </h3>
 <div class="panel panel-default">
   <!-- Default panel contents -->
@@ -19,7 +20,7 @@
           <th>Type</th>
         </tr>
       </thead>
-      <tbody *ngFor="let circular of circulars" class="container-border"> 
+      <tbody *ngFor="let circular of circulars"> 
         <tr data-toggle="collapse" [attr.data-target]="'#' + circular.id">
           <td>{{circular.title}}</td>
           <td>{{circular.start}}</td>

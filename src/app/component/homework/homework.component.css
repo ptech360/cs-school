@@ -1,3 +1,6 @@
+h3{
+  font-family: 'Anonymous Pro';
+}
 .homework > ul{
   width: 100%;  
 }
@@ -16,8 +19,20 @@
 	border-color: blue;
 }
 
-/*.homework-container{
-  width: 100%;
-  border-style: solid;
-  border-color:#cacacc;
-}*/
+.btn-custom{
+  padding: 7px 10px;
+  font-size: 18px;
+  font-family: 'Anonymous Pro';
+  transition: all 0.3s ease-in-out;
+  float: right; 
+  cursor: pointer;
+  background-color: #ea212e;  
+  color: white;
+  border-radius: 5px;
+   box-shadow: 5px 5px 5px #888888; 
+}
+
+.btn-custom:hover{
+  width:130px;
+  opacity: 0.8;
+ }
