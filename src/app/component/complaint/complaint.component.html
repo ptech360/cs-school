@@ -63,8 +63,8 @@
         <li class="page-item" [ngClass]="{'disabled': EmptyComplaints}"><a class="page-link" (click)="nextComplaint()">Next</a></li>
       </ul>
     </nav>-->
-    <button (click)="previousComplaint()" class="btn nav-btn right" [disabled]="currentPage === 1">Previous</button>
-    <button (click)="nextComplaint()" class="btn right nav-btn" [disabled]="EmptyComplaints || noMore">Next</button>    
+    <button (click)="previousComplaint()" [disabled]="currentPage === 1" type="button" class="btn btn-danger">Previous</button>
+    <button (click)="nextComplaint()" type="button" [disabled]="EmptyComplaints || noMore" class="btn btn-danger">Next</button>
   </div>
 </div>
 
