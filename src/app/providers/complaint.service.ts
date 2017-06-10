@@ -53,6 +53,12 @@ export class ComplaintService {
       .catch(this.handleError);
   }
 
+  public searchComplaints(pageNo, key){
+    return this.http.post(this.baseUrl + "/complaint/search/page/" + pageNo,key)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   editInfo() {
     return this.http.get(this.baseUrl + "/complaint/edit-info")
       .map(this.extractData)

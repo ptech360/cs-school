@@ -5,6 +5,12 @@
 
   <!-- Table -->
   <div class="panel-body">
+    <div class="form-group row">
+      <label for="example-search-input" class="col-lg-2 col-form-label">Search</label>
+      <div class="col-lg-10">
+        <input class="form-control" type="search" placeholder="Search by complaint title .,. " id="example-search-input" (keyup)="searchComplaints($event)">
+      </div>
+    </div>
     <table class="table table-hover" *ngIf="complaints">
       <thead>
         <tr>
@@ -13,7 +19,7 @@
           <th>StudentName</th>
           <th *ngIf="!complaintStatus">Status</th>
           <th>Priority</th>
-          <th *ngIf="!(complaintStatus == 4 || complaintStatus == 5)">Edit</th>
+          <th *ngIf="!(complaintStatus == 4 || complaintStatus == 6)">Edit</th>
           <th>Comment</th>
           <th></th>
         </tr>
@@ -185,7 +191,7 @@
     </div>
     <div class="clearFix"></div>
   </div>
-  <div class="panel-footer" *ngIf="closedOn">
+  <div class="panel-footer" *ngIf="!closedOn">
     <form [formGroup]="commentForm" (submit)="submitComment()">
       <textarea name="comment" formControlName="comment" cols="0" rows="0"></textarea>
       <span class="send-button">
