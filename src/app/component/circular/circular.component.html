@@ -47,7 +47,7 @@
         <li class="page-item" [ngClass]="{'disabled': EmptyCirculars}"><a class="page-link" (click)="nextCircular()">Next</a></li>
       </ul>
     </nav>-->
-    <button (click)="previousCircular()" class="btn nav-btn right" [disabled]="currentPage === 1">Previous</button>
-    <button (click)="nextCircular()" class="btn right nav-btn" [disabled]="EmptyCirculars || noMore">Next</button>    
+    <button (click)="previousCircular()" class="btn btn-danger nav-btn right" [disabled]="currentPage === 1">Previous</button>
+    <button (click)="nextCircular()" class="btn right btn-danger nav-btn" [disabled]="EmptyCirculars || noMore">Next</button>    
   </div>
 </div>

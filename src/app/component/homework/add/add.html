@@ -21,16 +21,23 @@
       <textarea class="form-control" id="exampleTextarea" name="description" maxlength="2500" formControlName="description" rows="3"></textarea>
       <span>{{2500 - homework.value.description.length}}</span>
     </div>
+    <div class="row">
+      <div class="col-sm-12 col-lg-6">
     <div class="form-group">
       <label for="date">Due Date</label>
       <input class="form-control glyphicon glyphicon-calendar" type="date" max="2019-10-31" displayFormat="DD MMM YYYY" name="duedate" formControlName="duedate" id="duedate">
     </div>
+      </div>
+      <div class="col-sm-12 col-lg-6">
     <div class="form-group">
       <div>Attachment</div>
         <label for="exampleInputFile" class="exampleInputFile">Choose a file...<span class="glyphicon glyphicon-circle-arrow-up custom"></span></label>
         <input type="file" class="form-control-file" formControlName="file" id="exampleInputFile" aria-describedby="fileHelp" (change)="getFile($event)" style="display:none;">
         <!--<small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>-->
       </div>
+      </div>
+    </div>
+
     <button type="submit" class="btn btn-success" [disabled]="!homework.valid">Submit</button>
   </form>
 </div>
