@@ -231,10 +231,10 @@
           <div class="profile-display">
             <div class="accBgImage">
               <div class="padding">
-              <img class="profile-img" src="https://us.123rf.com/450wm/tsirik/tsirik1312/tsirik131200021/24503597-businesswoman-shows-thumb-up-in-circle.jpg?ver=6">
+              <img class="profile-img" src="{{log.getData('picUrl')}}" *ngIf="log.getData('picUrl')">
               </div>
               <div class="profile-name">
-                Name here
+                {{log.getData('name')}}
               </div>
             </div>
           </div>

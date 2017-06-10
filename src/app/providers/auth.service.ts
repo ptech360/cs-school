@@ -80,6 +80,7 @@ export class AuthService {
     localStorage.setItem("fileUrl", data.fileUrl);
     localStorage.setItem("picOriginalName", data.picOriginalName);
     localStorage.setItem("picTimestamp", data.picTimestamp);
+    localStorage.setItem('picUrl', data.fileUrl+"/"+data.picTimestamp);
     this.con.setAccessToken();
   }
 

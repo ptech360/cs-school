@@ -13,6 +13,7 @@ export class CircularComponent implements OnInit {
   private currentPage = 1;
   public circulars;
   private EmptyCirculars: boolean = false;
+  public loader:boolean = false;
 
   constructor(private circularService: CircularService) {
     
@@ -23,18 +24,22 @@ export class CircularComponent implements OnInit {
   }
 
   private getCirculars() {
-    this.circularService.GetCirculars(1).subscribe((res) => {
+    this.loader = true;
+    this.circularService.GetCirculars(this.currentPage).subscribe((res) => {
       this.onSuccess(res);
     }, (err) => {
       this.onError(err);
     });
   }
-
+  public noMore:boolean;
   private onSuccess(data) {
-    if (data.status === 204) {
+    this.loader = false;
+    if (data.status === 204) {      
       this.EmptyCirculars = true;
     } else {
       this.circulars = data;
+      if(this.circulars.length < 10) this.noMore = true;
+      else this.noMore = false;
       this.EmptyCirculars = false;
     }
   }
@@ -43,40 +48,52 @@ export class CircularComponent implements OnInit {
 
   }
 
-  public onCircularSelected(circular) {
-    this.circularService.GetparticularCircular(circular.id).subscribe((res) => {
-      
-    }, (err) => {
-
-    })
+  previousCircular(){
+    delete this.circulars;
+    this.currentPage -= 1;
+    this.getCirculars();
   }
 
-  public doRefresh(refresher) {
-    setTimeout(() => {
-      this.circularService.GetCirculars(1).subscribe((res) => {
-        this.onSuccess(res);
-        refresher.complete();
-      }, (err) => {
-        refresher.complete();
-        this.onError(err);
-      });
-    }, 500);
-  }
-
-  public doInfinite(infiniteScroll) {
+  nextCircular(){
+    delete this.circulars;
     this.currentPage += 1;
-    setTimeout(() => {
-      this.circularService.GetCirculars(this.currentPage).subscribe(response => {
-        infiniteScroll.complete();
-        if (response.status === 204) {
-          this.currentPage -= 1;
-          return;
-        }
-        this.circulars = this.circulars.concat(response);
-      }, (err) => {
-        this.currentPage -= 1;
-        infiniteScroll.complete();
-      });
-    }, 1000);
+    this.getCirculars();
   }
+
+  // public onCircularSelected(circular) {
+  //   this.circularService.GetparticularCircular(circular.id).subscribe((res) => {
+      
+  //   }, (err) => {
+
+  //   })
+  // }
+
+  // public doRefresh(refresher) {
+  //   setTimeout(() => {
+  //     this.circularService.GetCirculars(1).subscribe((res) => {
+  //       this.onSuccess(res);
+  //       refresher.complete();
+  //     }, (err) => {
+  //       refresher.complete();
+  //       this.onError(err);
+  //     });
+  //   }, 500);
+  // }
+
+  // public doInfinite(infiniteScroll) {
+  //   this.currentPage += 1;
+  //   setTimeout(() => {
+  //     this.circularService.GetCirculars(this.currentPage).subscribe(response => {
+  //       infiniteScroll.complete();
+  //       if (response.status === 204) {
+  //         this.currentPage -= 1;
+  //         return;
+  //       }
+  //       this.circulars = this.circulars.concat(response);
+  //     }, (err) => {
+  //       this.currentPage -= 1;
+  //       infiniteScroll.complete();
+  //     });
+  //   }, 1000);
+  // }
 }
