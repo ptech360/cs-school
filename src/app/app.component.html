@@ -37,9 +37,11 @@
           <img class="sidebar-icon" src="{{page.icon}}">
           {{page.title}}</a>
         </li>  
-        <li href="#/login" (click)="logout()" class="sidebar-items">
+        <li  class="sidebar-items" data-toggle="modal" data-target=".bs-example-modal-sm">
+        <a href="#" routerLinkActive="active">
         <img class="sidebar-icon" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-9/256/Logout-icon.png">
          Logout 
+        </a>
         </li>      
       </ul>
     </div>
@@ -54,3 +56,15 @@
 
   </div>
 </main>
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+   <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal">&times;</button>
+      You will be logged out!
+   </div>
+    <div class="modal-footer">
+      <button href="#/login" (click)="logout()" data-dismiss="modal" class="btn btn-danger">Confirm</button>
+    </div>    
+  </div>
+</div>
