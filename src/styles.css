@@ -86,6 +86,14 @@ a{
   line-height: 1.42;
   border-radius: 15px;
 }
+
+  .glyphicon-calendar:before{
+    font-size: 20px;
+    padding-right: 10px;
+}
+.badge{
+    background-color: #ea212e;
+}
 .img-center{
     position:absolute;
     left:50%; 

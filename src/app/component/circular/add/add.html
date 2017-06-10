@@ -45,7 +45,7 @@
           <option *ngFor="let a of standards" [ngValue]="a.id"> {{a.name}}</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-success" [disabled]="!circular.valid">Submit<span class="glyphicon glyphicon-chevron-right"></span></button>
+      <button type="submit" class="btn btn-success" [disabled]="!circular.valid">Submit</button>
     </form>
     <div class="row text-center">
       <loader [condition]="submitProgress"></loader>

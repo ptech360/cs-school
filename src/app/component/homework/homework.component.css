@@ -29,3 +29,21 @@ form{
     border-style: none;
     background-color: inherit;
 }
+.exampleInputFile{
+ background-color:#ea212e;
+ padding: 10px; 
+ border-radius: 5px;
+ color: white;
+ font-family: Arial;
+ font-size: inherit;
+
+}
+.exampleInputFile:hover{
+  background-color:#c51e28;
+  cursor: pointer;
+}
+
+.custom{
+  padding-left: 5px;
+  font-size: 15px;
+}
