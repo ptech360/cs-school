@@ -248,3 +248,12 @@ a:hover{
 div,table,a{
     font-family:'Allerta';
 }
+.brand{
+    font-family:sans-serif;
+    color: white;
+}
+
+.logo{
+    height:40px;
+    width:auto;
+}
