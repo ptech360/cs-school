@@ -11,23 +11,23 @@
     <form name="circular" [formGroup]="circular" (ngSubmit)="circularSubmit()" novalidate>
       <div class="form-group">
         <label for="title">Enter Title</label>
-        <input type="email" class="form-control" id="title" formControlName="title" placeholder="Enter Title">
-        <span>{{50 - circular.value.title.length}}</span>
+        <span class="badge">
+          <span>{{50 - circular.value.title.length}}</span>
+        </span>
+        <input type="email" class="form-control" id="title" formControlName="title" placeholder="Add Title">
       </div>
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea class="form-control" id="exampleTextarea" name="description" maxlength="2000" formControlName="description" rows="3"></textarea>
-        <span>{{2000 - circular.value.description.length}}</span>
-      </div>
-      <div class="form-group">
-        <label for="date">Due Date</label>
-        <input class="form-control" type="date" name="date" formControlName="date" id="date" (change)="onDueDate($event)">
+        <span class="badge">
+           <span>{{2000 - circular.value.description.length}}</span>
+        </span>
+        <textarea class="form-control" id="exampleTextarea" name="description" maxlength="2000" formControlName="description" rows="3" placeholder="Add Description"></textarea>
       </div>
       <div class="row">
         <div class="col-lg-6 col-sm-12">
           <div class="form-group">
             <label for="date">Due Date</label>
-            <input class="form-control glyphicon glyphicon-calendar" type="date" max="2019-10-31" displayFormat="DD MMM YYYY" name="date" formControlName="date" id="date">
+            <input class="form-control glyphicon glyphicon-calendar" type="date" max="2019-10-31" (change)="onDueDate($event)" displayFormat="DD MMM YYYY" name="date" formControlName="date" id="date">
           </div>
         </div>
         <div class="col-lg-6 col-sm-12">

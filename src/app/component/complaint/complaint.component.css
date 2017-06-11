@@ -34,8 +34,6 @@ htlm, body
 }
 .panel.panel-chat .panel-heading
 {
-    background: #4b67a8;
-    border: 1px solid #2e4588;
     color:#FFF;
 }
 .panel.panel-chat .panel-heading a:nth-of-type(1)
